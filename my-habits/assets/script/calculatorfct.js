@@ -48,7 +48,7 @@ function getTotalTransport(kmCar, typeVoiture, kmBus, kmPlane, kmTrain, kmMetro,
     return emission;
 }
 
-function heatingConsommation(type) {
-    heatingConso = type.conso
+function heatingConsommation(type, size) {
+    heatingConso = type.conso * size
     return heatingConso;
 }

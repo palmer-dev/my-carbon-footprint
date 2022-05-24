@@ -201,13 +201,13 @@ function calculateCO2WithTheAnswers() {
 	var kmVoiture = questions[1].userAnswer || 0;
 	var typeVoiture = questions[4].userAnswer || "Gasoline";
 	var kmPlane = questions[5].userAnswer || 0;
-	var kmMetro = questions[7].userAnswer || 0;
 	var kmTrain = questions[6].userAnswer || 0;
+	var kmMetro = questions[7].userAnswer || 0;
 	var kmBus = questions[8].userAnswer || 0;
-	var sizeHome = questions[13].userAnswer || 50;
 	var typeHeating = questions[9].userAnswer || "Electricity";
+	var sizeHome = questions[13].userAnswer || 50;
 	$.get("./assets/json/data.json", function (data) {
-		displayResults(getTotalTransport(kmVoiture, typeVoiture, kmBus, kmPlane, kmTrain, kmMetro, data) + heatingConsommation(findInJson(data, "chauffage"+typeHeating)));
+		displayResults(getTotalTransport(kmVoiture, typeVoiture, kmBus, kmPlane, kmTrain, kmMetro, data) + heatingConsommation(findInJson(data, "chauffage"+typeHeating), sizeHome));
 	return;
 	});
 }

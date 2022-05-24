@@ -10,6 +10,7 @@ function main() {
 	// Getting DATA
 	getItineraryFromUser();
 	getHabitsFromUser();
+	getAdvicesFromUser();
 
 	// Preparing page
 	prepareButtonHover();

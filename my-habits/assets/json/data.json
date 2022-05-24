@@ -51,27 +51,27 @@
  },
  {
   "type": "chauffageFuel",
-  "conso": 4276,
+  "conso": 53.46,
   "unite": "kgCo2 \/an \/ m²"
  },
  {
   "type": "chauffageNatural gaz",
-  "conso": 1816,
-  "unite": "kgCo2 \/an"
+  "conso": 22.7,
+  "unite": "kgCo2 \/an \/ m²"
  },
  {
   "type": "chauffageElectricity",
-  "conso": 1293,
-  "unite": "kgco2 \/an"
+  "conso": 16.17,
+  "unite": "kgCo2 \/an \/ m²"
  },
  {
   "type": "chauffageCharcoal",
-  "conso": 432,
-  "unite": "kgco2 \/an"
+  "conso": 5.4,
+  "unite": "kgCo2 \/an \/ m²"
  },
  {
   "type": "chauffageGeothermal energy",
-  "conso": 1840,
+  "conso": 23,
   "unite": "kgCo2 \/an \/ m²"
  },
  {

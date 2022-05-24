@@ -279,7 +279,7 @@
             $returnData = (object) $dbAccess->sqlSelect($requestSelection);
             $returnArray = [];
             foreach ($returnData->texeturned as $value){
-                array_push($returnArray, new advicesInfos());
+                array_push($returnArray, new advicesInfos($value->ha_id, $value->qu_short_title, $value->ha_valeur_utilisateur));
             }
             $returnData->textReturned = $returnArray;
             print_r((json_encode($returnData)));

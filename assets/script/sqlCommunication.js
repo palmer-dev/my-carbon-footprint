@@ -67,7 +67,7 @@ export function connectUser(username, password) {
 	request.send(JSON.stringify(data));
 }
 
-export function selectDataBase(data, callBack = (response) => {}) {
+export function selectDataBase(data, callBack = (response) => { }) {
 	var request = new XMLHttpRequest();
 	request.open("POST", "/assets/php/databaseActivity.php", true);
 	request.setRequestHeader("Content-Type", "application/json");
@@ -76,6 +76,7 @@ export function selectDataBase(data, callBack = (response) => {}) {
 			var response = JSON.parse(this.responseText);
 			if (response.error) {
 				// Error while doing the sql request
+				console.log(response);
 				alert("Error while asking the server, please try again.");
 			} else {
 				callBack(response.textReturned);
