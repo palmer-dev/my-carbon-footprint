@@ -1,0 +1,180 @@
+.backgroundclouds {
+	z-index: -1;
+	top: 0;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	.clouds {
+		height: 200px;
+		position: absolute;
+		&:nth-child(1) {
+			top: 10%;
+			left: 10%;
+		}
+		&:nth-child(2) {
+			top: 30%;
+		}
+		&:nth-child(3) {
+			top: 50%;
+		}
+		&:nth-child(4) {
+			top: 70%;
+		}
+		@include for-mobile {
+			height: 100px;
+			transform: translateX(-40%);
+		}
+	}
+}
+
+input {
+	// MAIN
+	margin: 5px 10px 0px 10px;
+
+	// INPUT TEXT AND PASSWORD
+	&[type="text"],
+	&[type="password"],
+	&[type="email"] {
+		border: 3px solid transparent;
+		text-align: center;
+		outline: none;
+		border-radius: 10px;
+		height: 5rem;
+		width: 30rem;
+		border-radius: 2.5rem;
+		font-size: 2rem;
+		@include font-style(20, $FC-primary);
+		@include for-mobile {
+			height: calc(5rem * 0.5);
+			width: calc(30rem * 0.5);
+		}
+	}
+
+	// GENERAL BUTTONS
+	&[type="button"],
+	&[type="submit"] {
+		border: none;
+		border-radius: 20px;
+		height: 4rem;
+		padding: 0 3rem;
+		transition: all 0.2s;
+		@include for-mobile {
+			height: calc(4rem * 0.5);
+			padding: 0 calc(3rem * 0.5);
+			margin: 5px 0px;
+		}
+	}
+
+	&[type="submit"] {
+		@include font-style(20, $FC-contrast);
+		width: fit-content;
+		margin-top: 50px;
+		background-color: $BTN-thrid;
+		background-image: linear-gradient(1deg, $BTN-first, $BTN-second 99%);
+		background-size: calc(100% + 20px) calc(100% + 20px);
+		@include for-mobile {
+			margin-top: 20px;
+		}
+	}
+	&[type="submit"]:hover {
+		background-position: -20px -20px;
+		transform: scale(1.1);
+	}
+
+	&[type="button"] {
+		@include font-style(20, $FC-contrast);
+		background-color: transparent;
+		border: 3px solid;
+		@include for-mobile {
+			border: 2px solid;
+			border-color: $BTN-first;
+		}
+		border-color: $BTN-first;
+	}
+
+	&[type="button"]:hover {
+		border-color: $BTN-second;
+		transform: scale(1.1);
+	}
+
+	// RESPONSIVE
+	@include for-mobile {
+		margin: 10px 5px;
+	}
+}
+
+.userInfos {
+	width: 100%;
+	display: flex;
+	flex-flow: row nowrap;
+	margin-bottom: 20px;
+	.input {
+		width: 50%;
+		input {
+			width: calc(100% - 20px);
+			@include for-mobile {
+				width: calc(100% - 10px);
+			}
+		}
+	}
+	@include for-mobile {
+		margin-bottom: 10px;
+	}
+}
+
+.loginInfos {
+	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	.half {
+		width: 50%;
+	}
+	.full {
+		width: calc(100% - 20px);
+		@include for-mobile {
+			width: calc(100% - 10px);
+		}
+	}
+}
+
+.fullwidth {
+	width: 100%;
+}
+
+.input {
+	margin-top: 20px;
+	label {
+		@include font-style(20, $FC-contrast, 600);
+		text-transform: uppercase;
+		margin-left: 10px;
+		margin-bottom: 25px;
+	}
+	p {
+		@include font-style(15, red, 600);
+		margin: 5px 15px 15px 0px;
+		text-align: right;
+		span {
+			display: none;
+		}
+	}
+}
+
+.form {
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.legend {
+	align-self: flex-start;
+	@include font-style(15, $FC-contrast);
+	margin-left: 10px;
+	@include for-mobile {
+		margin-left: 5px;
+	}
+}
+
+.asterisk {
+	color: red;
+}

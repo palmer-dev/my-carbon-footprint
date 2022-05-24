@@ -1,0 +1,132 @@
+.fullheight {
+	align-items: center;
+	height: calc(100% - 360px);
+	@include for-mobile {
+		height: calc(100% - 200px);
+	}
+}
+
+.card {
+	min-width: 500px;
+	height: fit-content;
+	@include for-mobile {
+		min-width: 200px;
+		width: 70vw;
+	}
+	border: 1px solid black;
+	padding: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	background: rgba($color: #caf0f8, $alpha: 0.072);
+	border-radius: 20px;
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	box-shadow: $standard-shadow;
+	display: flex;
+	flex-flow: column wrap;
+	place-items: center center;
+	h3 {
+		@include font-style(35, $FC-contrast, bolder);
+		text-decoration: underline;
+		margin-bottom: 2rem;
+		@include for-mobile {
+			margin-bottom: 1rem;
+		}
+	}
+	p {
+		text-align: center;
+	}
+}
+
+input {
+	// INPUT TEXT AND PASSWORD
+	&[type="text"],
+	&[type="password"] {
+		border: none;
+		text-align: center;
+		outline: none;
+		border: none;
+		border-radius: 10px;
+		height: 5rem;
+		width: 30rem;
+		border-radius: 2.5rem;
+		font-size: 2rem;
+		@include font-style(20, $FC-primary);
+		@include for-mobile {
+			height: calc(5rem * 0.5);
+			width: calc(30rem * 0.5);
+		}
+	}
+
+	// GENERAL BUTTONS
+	&[type="button"],
+	&[type="submit"] {
+		margin: 10px 0px;
+		border: none;
+		border-radius: 20px;
+		height: 4rem;
+		padding: 0 3rem;
+		transition: all 0.2s;
+		@include for-mobile {
+			height: calc(4rem * 0.5);
+			padding: 0 calc(3rem * 0.5);
+			margin: 5px 0px;
+		}
+	}
+
+	&[type="submit"] {
+		@include font-style(20, $FC-contrast);
+		// background: linear-gradient(120deg, $primary, $primary-first-variante);
+		background-color: $BTN-thrid;
+		background-image: linear-gradient(1deg, $BTN-first, $BTN-second 99%);
+		background-size: calc(100% + 20px) calc(100% + 20px);
+	}
+	&[type="submit"]:hover {
+		background-position: -20px -20px;
+		transform: scale(1.1);
+	}
+
+	&[type="button"] {
+		@include font-style(20, $FC-contrast);
+		background-color: transparent;
+		border: 3px solid;
+		@include for-mobile {
+			border: 2px solid;
+			border-color: $BTN-first;
+		}
+		border-color: $BTN-first;
+	}
+
+	&[type="button"]:hover {
+		border-color: $BTN-second;
+		transform: scale(1.1);
+	}
+}
+
+.input {
+	display: flex;
+	flex-flow: column wrap;
+	margin-top: 10px;
+	label {
+		@include font-style(20, $FC-contrast, 600);
+		text-transform: uppercase;
+		margin-left: 10px;
+		margin-bottom: 10px;
+		@include for-mobile {
+			margin-bottom: 5px;
+		}
+	}
+	p {
+		@include font-style(15, red, 600);
+		margin: 5px 15px 15px 0px;
+		text-align: right;
+		span {
+			display: none;
+		}
+		@include for-mobile {
+			margin-bottom: 5px;
+		}
+	}
+	@include for-mobile {
+		margin-top: 5px;
+	}
+}

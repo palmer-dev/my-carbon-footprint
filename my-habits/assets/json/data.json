@@ -1,0 +1,127 @@
+[
+ {
+  "type": "GasolineCar",
+  "conso": 0.223,
+  "unite": "kgCo2\/km"
+ },
+ {
+  "type": "Diesel FuelCar",
+  "conso": 0.212,
+  "unite": "kgco2\/km"
+ },
+ {
+  "type": "EthanolCar",
+  "conso": 0.147,
+  "unite": "kgco2\/km"
+ },
+ {
+  "type": "Bio-dieselCar",
+  "conso": 0.217,
+  "unite": "kgco2\/km"
+ },
+ {
+  "type": "OtherCar",
+  "conso": 0.221,
+  "unite": "kgco2\/km"
+ },
+ {
+  "type": "ElectricityCar",
+  "conso": 0.103,
+  "unite": "kgco2\/km"
+ },
+ {
+  "type": "plane",
+  "conso": 0.187,
+  "unite": "kgCO2e\/km"
+ },
+ {
+  "type": "train",
+  "conso": 2.36e-3,
+  "unite": "kgCO2e\/km"
+ },
+ {
+  "type": "metro",
+  "conso": 3.29e-3,
+  "unite": "kgCO2e\/km"
+ },
+ {
+  "type": "bus",
+  "conso": 0.151,
+  "unite": "kgCO2e\/km"
+ },
+ {
+  "type": "chauffageFuel",
+  "conso": 4276,
+  "unite": "kgco2\/an"
+ },
+ {
+  "type": "chauffageNatural gaz",
+  "conso": 1816,
+  "unite": "kgCo2 \/an"
+ },
+ {
+  "type": "chauffageElectricity",
+  "conso": 1293,
+  "unite": "kgco2 \/an"
+ },
+ {
+  "type": "chauffageCharcoal",
+  "conso": 432,
+  "unite": "gco2 \/an"
+ },
+ {
+  "type": "chauffageGeothermal energy",
+  "conso": 1840,
+  "unite": "gCo2 \/an"
+ },
+ {
+  "type": "electricityCharcoal",
+  "conso": 1.06,
+  "unite": "kgCO2e\/kWh"
+ },
+ {
+  "type": "electricityFuel",
+  "conso": 0.73,
+  "unite": "kgCO2e\/kWh"
+ },
+ {
+  "type": "electricityGaz",
+  "conso": 0.418,
+  "unite": "kgCO2e\/kWh"
+ },
+ {
+  "type": "electricityNuclear",
+  "conso": 6e-3,
+  "unite": "kgCO2e\/kWh"
+ },
+ {
+  "type": "electricityWind power",
+  "conso": 0.0141,
+  "unite": "kgCO2e\/kWh"
+ },
+ {
+  "type": "electricityGeothermal energy",
+  "conso": 0.045,
+  "unite": "kgCO2e\/kWh"
+ },
+ {
+  "type": "electricityHydraulic",
+  "conso": 6e-3,
+  "unite": "kgCO2e\/kWh"
+ },
+ {
+  "type": "electricitySun power",
+  "conso": 0.0439,
+  "unite": "kgCO2e\/kWh"
+ },
+ {
+  "type": "manger viande",
+  "conso": 40,
+  "unite": "kgCO2e\/kg"
+ },
+ {
+  "type": "manger viande local",
+  "conso": 17,
+  "unite": "kgCO2e\/kg"
+ }
+]

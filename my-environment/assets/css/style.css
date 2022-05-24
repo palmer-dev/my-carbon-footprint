@@ -1,0 +1,782 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap");
+nav {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 100px;
+  background: #c1c8e4 0% 0% no-repeat padding-box;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1607843137);
+  z-index: 100;
+  position: sticky;
+  top: 0px;
+}
+nav div {
+  height: 80px;
+  display: flex;
+  flex-flow: row nowrap;
+  z-index: 100;
+}
+nav div div {
+  height: 100%;
+}
+nav div div img {
+  height: 90px;
+  top: -50%;
+}
+nav div div:nth-child(1) {
+  width: 40%;
+}
+nav div div:nth-child(2) {
+  width: 60%;
+}
+nav ul {
+  list-style-type: none;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+nav ul li {
+  display: flex;
+  flex-flow: row nowrap;
+}
+nav ul li a {
+  outline: none;
+  text-decoration: none;
+  color: rgb(59, 59, 59);
+  font-weight: 600;
+  font-size: 2rem;
+}
+nav ul li a.logout {
+  color: #a41e1e;
+}
+nav ul li a.logout img {
+  height: 100%;
+}
+nav ul li::after {
+  content: " ";
+  position: absolute;
+  background-color: #a997c9;
+  border-radius: 5px;
+  height: 5px;
+  width: 0%;
+  top: calc(100% + 5px);
+  transition: width 0.6s ease;
+}
+nav ul li:hover::after {
+  width: 100%;
+}
+nav .selectedMenu::after {
+  content: " ";
+  position: absolute;
+  background-color: #8860d0;
+  border-radius: 5px;
+  animation: underline 0.6s ease forwards;
+  height: 5px;
+  top: calc(100% + 5px);
+}
+nav input[type=checkbox] {
+  display: none;
+}
+@media (max-width: 599px) {
+  nav {
+    margin-bottom: 20px;
+  }
+  nav div:nth-child(2) {
+    justify-content: right;
+  }
+  nav ul {
+    display: none;
+  }
+  nav label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50px;
+    cursor: pointer;
+  }
+  nav label span {
+    background: #fff;
+    border-radius: 10px;
+    height: 5px;
+    margin: 5px 0;
+    transition: 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  }
+  nav span:nth-of-type(1) {
+    width: 50%;
+  }
+  nav span:nth-of-type(2) {
+    width: 100%;
+  }
+  nav span:nth-of-type(3) {
+    width: 75%;
+  }
+  nav input[type=checkbox]:checked ~ span:nth-of-type(1) {
+    transform-origin: bottom;
+    transform: rotatez(45deg) translate(8px, 0px);
+  }
+  nav input[type=checkbox]:checked ~ span:nth-of-type(2) {
+    transform-origin: top;
+    transform: rotatez(-45deg);
+  }
+  nav input[type=checkbox]:checked ~ span:nth-of-type(3) {
+    transform-origin: bottom;
+    width: 50%;
+    transform: translate(23px, -7px) rotatez(45deg);
+  }
+}
+
+#burger {
+  display: none;
+  position: absolute;
+  width: 100% !important;
+  z-index: 3;
+}
+@media (max-width: 599px) {
+  #burger {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+}
+#burger div {
+  height: min-content;
+  padding: 10px;
+  width: 100% !important;
+  background-color: rgba(193, 200, 228, 0.95);
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+}
+#burger div p {
+  color: rgb(59, 59, 59);
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+#burger div p.logout {
+  color: #a41e1e;
+}
+
+@keyframes underline {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Comfortaa", cursive;
+  background-image: linear-gradient(142deg, #5ab9ea 0%, #5680e9 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100%;
+}
+@media (max-width: 599px) {
+  body {
+    background-attachment: fixed;
+  }
+}
+
+.useful-width {
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+@media (max-width: 599px) {
+  .useful-width {
+    margin: 0px 10px;
+  }
+}
+
+h1 {
+  color: black;
+  font-weight: 600;
+  font-size: 5rem;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media (max-width: 599px) {
+  h1 {
+    font-size: 2.5rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+
+.invalide {
+  border: 3px solid red !important;
+}
+
+.disclaimer {
+  position: absolute;
+  text-align: left;
+}
+.disclaimer h1 {
+  text-align: center;
+  margin-bottom: 100px;
+}
+@media (max-width: 599px) {
+  .disclaimer h1 {
+    margin-bottom: 40px;
+  }
+}
+.disclaimer p {
+  color: rgb(59, 59, 59);
+  font-weight: normal;
+  font-size: 2rem;
+  line-height: normal;
+  letter-spacing: normal;
+  margin-bottom: 30px;
+}
+@media (max-width: 599px) {
+  .disclaimer p {
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+@media (max-width: 599px) {
+  .disclaimer p {
+    margin-bottom: 15px;
+  }
+}
+
+.thirdAction {
+  outline: none;
+  color: #fff;
+}
+
+.top-card {
+  border: 1px solid black;
+  padding: 50px 100px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(202, 240, 248, 0.072);
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  text-align: center;
+  box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20px 100px 20px;
+  z-index: 2;
+}
+.top-card h2 {
+  color: #fff;
+  font-weight: normal;
+  font-size: 4rem;
+  line-height: normal;
+  letter-spacing: normal;
+  text-transform: uppercase;
+}
+@media (max-width: 599px) {
+  .top-card h2 {
+    font-size: 2rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+@media (max-width: 599px) {
+  .top-card {
+    height: max-content;
+    margin-bottom: 20px;
+    padding: 25px 30px;
+  }
+}
+
+body {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+h2 {
+  color: #fff;
+  font-weight: bold;
+  font-size: 4rem;
+  line-height: normal;
+  letter-spacing: normal;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 50px;
+}
+@media (max-width: 599px) {
+  h2 {
+    font-size: 2rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+
+.card {
+  border: 1px solid black;
+  min-height: 200px;
+  width: 80%;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(202, 240, 248, 0.072);
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  text-align: center;
+  box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
+}
+.card h3 {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.8rem;
+  line-height: normal;
+  letter-spacing: normal;
+  margin-bottom: 20px;
+}
+@media (max-width: 599px) {
+  .card h3 {
+    font-size: 0.9rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+@media (max-width: 599px) {
+  .card {
+    padding: 10px;
+  }
+}
+
+.contentCard {
+  position: relative;
+  height: calc(100% - 20px);
+  width: 100%;
+}
+.contentCard > h4 {
+  position: absolute;
+  width: 100%;
+  top: calc(50% - 20px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-weight: normal;
+  font-size: 1.6rem;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media (max-width: 599px) {
+  .contentCard > h4 {
+    font-size: 0.8rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+.contentCard div hr {
+  margin: auto;
+  margin-top: 20px;
+  width: 50%;
+  height: 3px;
+  border-top: white;
+}
+.contentCard div:last-child hr {
+  display: none;
+}
+
+.cardItinerary {
+  border: solid 1px rgba(86, 128, 233, 0.5);
+  background: rgba(132, 206, 235, 0.3);
+  border-radius: 10px;
+  box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.1);
+  margin: 20px 0px;
+  padding: 10px 0px;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: ". originMobile . emoji emoji" "origin arrow destination emoji emoji" ". destinationMobile . distance co2";
+  position: relative;
+  left: 120px;
+  opacity: 0;
+  animation: showingCards 0.4s ease-out forwards;
+}
+.cardItinerary p {
+  color: #fff;
+  font-weight: normal;
+  font-size: 1.8rem;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media (max-width: 599px) {
+  .cardItinerary p {
+    font-size: 0.9rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+.cardItinerary p#origin {
+  grid-area: origin;
+  color: #fff;
+  font-weight: bold;
+  font-size: 2rem;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media (max-width: 599px) {
+  .cardItinerary p#origin {
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+@media (max-width: 599px) {
+  .cardItinerary p#origin {
+    grid-area: originMobile;
+  }
+}
+.cardItinerary img#arrow {
+  grid-area: arrow;
+  max-width: 50%;
+}
+@media (max-width: 599px) {
+  .cardItinerary img#arrow {
+    transform: rotate(90deg);
+    max-height: 25%;
+  }
+}
+.cardItinerary p#destination {
+  grid-area: destination;
+  color: #fff;
+  font-weight: bold;
+  font-size: 2rem;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media (max-width: 599px) {
+  .cardItinerary p#destination {
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+@media (max-width: 599px) {
+  .cardItinerary p#destination {
+    grid-area: destinationMobile;
+  }
+}
+.cardItinerary p#transport {
+  grid-area: emoji;
+  color: #fff;
+  font-weight: normal;
+  font-size: 6rem;
+  line-height: normal;
+  letter-spacing: normal;
+  transform: translateY(-20%);
+}
+@media (max-width: 599px) {
+  .cardItinerary p#transport {
+    font-size: 3rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+.cardItinerary p#transportName {
+  grid-area: emoji;
+  color: #fff;
+  font-weight: normal;
+  font-size: 2rem;
+  line-height: normal;
+  letter-spacing: normal;
+  transform: translateY(130%);
+}
+@media (max-width: 599px) {
+  .cardItinerary p#transportName {
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+.cardItinerary p#distance {
+  grid-area: distance;
+}
+.cardItinerary p#co2 {
+  grid-area: co2;
+}
+.cardItinerary .separation {
+  position: absolute;
+  left: 63%;
+  width: 2px;
+  height: 90%;
+  background: rgba(128, 128, 128, 0.5);
+  right: -9px;
+}
+.cardItinerary #delButton {
+  position: absolute;
+  top: 0px;
+  left: 100%;
+  outline: none;
+  border: 1px solid black;
+  height: 20px;
+  width: 20px;
+  background-color: rgb(226, 63, 63);
+  border-radius: 10px;
+  transform: translate(-50%, -50%);
+}
+.cardItinerary #delButton:active {
+  background-color: rgba(226, 63, 63, 0.4);
+}
+
+.habitsCard {
+  margin: 20px 0px;
+  padding: 10px 0px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
+  position: relative;
+  left: 120px;
+  opacity: 0;
+  animation: showingCards 0.4s ease-out forwards;
+}
+.habitsCard button {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  left: 95%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s;
+  color: #fff;
+  font-weight: normal;
+  font-size: 4rem;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media (max-width: 599px) {
+  .habitsCard button {
+    font-size: 2rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+.habitsCard button:hover {
+  color: #fff;
+  font-weight: normal;
+  font-size: 5rem;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media (max-width: 599px) {
+  .habitsCard button:hover {
+    font-size: 2.5rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+.habitsCard h4 {
+  margin: 20px 0px 10px 20px;
+  color: #fff;
+  font-weight: normal;
+  font-size: 2.4rem;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media (max-width: 599px) {
+  .habitsCard h4 {
+    font-size: 1.2rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+.habitsCard h4#dateAnswers {
+  margin: 0;
+  font-weight: bold;
+}
+.habitsCard h4#dateAnswers::after {
+  content: "";
+  background: silver;
+  width: 35%;
+  height: 4px;
+  border-radius: 3px;
+  position: absolute;
+  top: 110%;
+  left: 0px;
+}
+@media (max-width: 599px) {
+  .habitsCard h4 {
+    margin: 10px 0px 5px 10px;
+  }
+}
+.habitsCard p {
+  margin-left: 40px;
+  color: #fff;
+  font-weight: normal;
+  font-size: 1.6rem;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+}
+@media (max-width: 599px) {
+  .habitsCard p {
+    font-size: 0.8rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+@media (max-width: 599px) {
+  .habitsCard p {
+    margin-left: 20px;
+  }
+}
+.habitsCard .footPrintSum {
+  color: #fff;
+  font-weight: normal;
+  font-size: 2.6rem;
+  line-height: normal;
+  letter-spacing: normal;
+  position: relative;
+  left: 93%;
+  transform: translateX(-100%);
+}
+@media (max-width: 599px) {
+  .habitsCard .footPrintSum {
+    font-size: 1.3rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+.habitsCard .accuracyCalc {
+  margin-top: 0.5%;
+  color: #fff;
+  font-weight: normal;
+  font-size: 1.4rem;
+  line-height: normal;
+  letter-spacing: normal;
+  position: relative;
+  left: 93%;
+  transform: translateX(-100%);
+}
+@media (max-width: 599px) {
+  .habitsCard .accuracyCalc {
+    font-size: 0.7rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+@media (max-width: 599px) {
+  .habitsCard {
+    margin: 10px 0px;
+  }
+}
+
+.removedCard {
+  animation: removingCards 0.5s ease-in-out forwards;
+}
+
+#informations {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+}
+#informations p {
+  color: #fff;
+  font-weight: normal;
+  font-size: 1.8rem;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media (max-width: 599px) {
+  #informations p {
+    font-size: 0.9rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+
+.boldInfos {
+  font-weight: bold;
+}
+
+#deleteAccountBtn {
+  background-color: #f03949;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  position: absolute;
+  left: 80%;
+  top: 50%;
+  transform: translate(-100%, -100%);
+  transition: transform 0.5s ease-in-out;
+  color: #fff;
+  font-weight: normal;
+  font-size: 1.4rem;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media (max-width: 599px) {
+  #deleteAccountBtn {
+    font-size: 0.7rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+#deleteAccountBtn:hover {
+  transform: translate(-100%, -100%) scale(1.2);
+}
+
+.caution {
+  transition: all 0.4s ease-in-out;
+  color: #fff;
+  font-weight: normal;
+  font-size: 4rem;
+  line-height: normal;
+  letter-spacing: normal;
+  z-index: -1;
+}
+@media (max-width: 599px) {
+  .caution {
+    font-size: 2rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+
+@keyframes showingCards {
+  from {
+    opacity: 0;
+    left: 120px;
+  }
+  to {
+    opacity: 1;
+    left: 0px;
+  }
+}
+@keyframes removingCards {
+  from {
+    opacity: 1;
+    left: 0px;
+  }
+  to {
+    opacity: 0;
+    left: 120px;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

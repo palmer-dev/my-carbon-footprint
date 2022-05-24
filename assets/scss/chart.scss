@@ -1,0 +1,52 @@
+.chartTitle {
+	width: 100%;
+	@include font-style(16, $FC-contrast, normal);
+	text-align: center;
+	margin: 20px;
+	@include for-mobile {
+		margin: 5px;
+	}
+}
+p.uppercase {
+	text-transform: uppercase;
+	@include font-style(20, $FC-contrast, bold);
+}
+
+#chart {
+	tr {
+		height: 60px;
+		@include for-mobile {
+			height: 30px;
+		}
+		td:nth-child(1) {
+			width: 80%;
+			div {
+				width: 0%;
+				transition: width 2s ease 0s;
+				height: 40px;
+				background: rgb(255, 72, 0);
+				padding-right: 15px;
+				border-radius: 50px;
+				display: flex;
+				flex-flow: row-reverse nowrap;
+				align-items: center;
+				h3 {
+					@include font-style(18, $FC-contrast);
+					transition: transform 0.5s;
+					transform: translateX(180%);
+				}
+				@include for-mobile {
+					height: 25px;
+				}
+			}
+		}
+		td:nth-child(2) {
+			width: 20%;
+			padding-left: 40px;
+			h3 {
+				@include font-style(24, $FC-contrast, bold, normal, 2);
+				display: inline;
+			}
+		}
+	}
+}

@@ -1,0 +1,49 @@
+// FONCTIONS TO SIMPLIFY ADAPTABILITY
+
+@mixin for-mobile {
+	@media (max-width: 599px) {
+		@content;
+	}
+}
+
+@mixin font-style(
+	$font-size,
+	$font-color,
+	$font-weight: normal,
+	$line-height: normal,
+	$letter-spacing: normal
+) {
+	color: $font-color;
+
+	font-weight: $font-weight;
+
+	font-size: $font-size * 0.1rem;
+
+	@if $line-height==normal {
+		line-height: normal;
+	} @else {
+		line-height: $line-height / $font-size;
+	}
+
+	@if $letter-spacing==normal {
+		letter-spacing: normal;
+	} @else {
+		letter-spacing: calc($letter-spacing / $font-size) rem;
+	}
+
+	@include for-mobile {
+		font-size: $font-size * 0.05rem;
+
+		@if $line-height==normal {
+			line-height: normal;
+		} @else {
+			line-height: $line-height / $font-size;
+		}
+
+		@if $letter-spacing==normal {
+			letter-spacing: normal;
+		} @else {
+			letter-spacing: calc($letter-spacing / $font-size) rem;
+		}
+	}
+}

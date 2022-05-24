@@ -1,0 +1,132 @@
+[
+ {
+  "type": "voiture essence",
+  "conso": 0.223,
+  "unite": "kgCo2\/km"
+ },
+ {
+  "type": "voiture gazole",
+  "conso": 0.212,
+  "unite": "kgco2\/km"
+ },
+ {
+  "type": "voiture E85",
+  "conso": 0.147,
+  "unite": "kgco2\/km"
+ },
+ {
+  "type": "voiture gpl",
+  "conso": 0.217,
+  "unite": "kgco2\/km"
+ },
+ {
+  "type": "voiture gnv",
+  "conso": 0.221,
+  "unite": "kgco2\/km"
+ },
+ {
+  "type": "voiture electrique",
+  "conso": 0.103,
+  "unite": "kgco2\/km"
+ },
+ {
+  "type": "avion",
+  "conso": "0,187",
+  "unite": "kgCO2e\/km"
+ },
+ {
+  "type": "train",
+  "conso": "2,36e-3",
+  "unite": "kgCO2e\/km"
+ },
+ {
+  "type": "metro",
+  "conso": "3,29e-3",
+  "unite": "kgCO2e\/km"
+ },
+ {
+  "type": "bus",
+  "conso": "0,151",
+  "unite": "kgCO2e\/km"
+ },
+ {
+  "type": "chauffage fioul ",
+  "conso": "200",
+  "unite": "kWh \/an"
+ },
+ {
+  "type": "chauffage gaz naturel",
+  "conso": "191",
+  "unite": "kWh \/an"
+ },
+ {
+  "type": "chauffage electrique",
+  "conso": "65",
+  "unite": "kWh \/an"
+ },
+ {
+  "type": "chauffage charbon",
+  "conso": "172",
+  "unite": "kWh \/an"
+ },
+ {
+  "type": "chauffage gpl",
+  "conso": "80",
+  "unite": "kWh \/an"
+ },
+ {
+  "type": "chauffage geothermique",
+  "conso": "230",
+  "unite": "kWh \/an"
+ },
+ {
+  "type": "electricite central charbon",
+  "conso": "1,06",
+  "unite": "kgCO2e\/kWh"
+ },
+ {
+  "type": "electricite central fuel",
+  "conso": "0,73",
+  "unite": "kgCO2e\/kWh"
+ },
+ {
+  "type": "electricite central gaz",
+  "conso": "0,418",
+  "unite": "kgCO2e\/kWh"
+ },
+ {
+  "type": "electricite central nucleaire",
+  "conso": "6e-3",
+  "unite": "kgCO2e\/kWh"
+ },
+ {
+  "type": "electricite eolien",
+  "conso": "0,0141",
+  "unite": "kgCO2e\/kWh"
+ },
+ {
+  "type": "electricite geothermie",
+  "conso": "0,045",
+  "unite": "kgCO2e\/kWh"
+ },
+ {
+  "type": "electricite hydraulique",
+  "conso": "6e-3",
+  "unite": "kgCO2e\/kWh"
+ },
+ {
+  "type": "electricite solaire",
+  "conso": "0,0439",
+  "unite": "kgCO2e\/kWh"
+ },
+ {
+  "type": "manger viande",
+  "conso": "40",
+  "unite": "kgCO2e\/kg"
+ },
+ {
+  "type": "manger viande local",
+  "conso": "17",
+  "unite": "kgCO2e\/kg"
+ }
+]

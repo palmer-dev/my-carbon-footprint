@@ -1,0 +1,39 @@
+// PRIMARY COLORS VARIABLES
+$primary: #5680e9;
+$primary-first-variante: #84ceeb;
+$primary-second-variante: #5ab9ea;
+
+// COLOR VARIABLES FOR BTN
+$BTN-first: #4f58fd;
+$BTN-second: #149bf3;
+$BTN-thrid: #3eb2fd;
+$BTN-suppression: rgb(226, 63, 63);
+
+// SECONDARY COLORS VARIABLES
+$secondary: #8860d0;
+$secondary-first-variante: #c1c8e4;
+$secondary-second-variante: #a997c9;
+
+// FONT COLOR VARIABLES
+$FC-primary: rgb(59, 59, 59);
+$FC-contrast: #fff;
+$FC-important: #a41e1e;
+
+// SHADOW VARIABLES
+$standard-shadow: 5px 5px 20px -5px rgba(
+		$color: #000000,
+		$alpha: 0.1,
+	);
+$standard-shadow-hover: 10px 10px 20px -5px rgba(
+		$color: #000000,
+		$alpha: 0.1,
+	);
+
+$nav-shadow: 0px 8px 20px #00000029;
+$filter-shadow: drop-shadow(
+	15px 15px 20px
+		rgba(
+			$color: #000000,
+			$alpha: 0.4,
+		)
+);

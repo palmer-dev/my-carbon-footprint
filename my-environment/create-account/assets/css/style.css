@@ -1,0 +1,562 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap");
+nav {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 100px;
+  background: #c1c8e4 0% 0% no-repeat padding-box;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1607843137);
+  z-index: 100;
+  position: sticky;
+  top: 0px;
+}
+nav div {
+  height: 80px;
+  display: flex;
+  flex-flow: row nowrap;
+  z-index: 100;
+}
+nav div div {
+  height: 100%;
+}
+nav div div img {
+  height: 90px;
+  top: -50%;
+}
+nav div div:nth-child(1) {
+  width: 40%;
+}
+nav div div:nth-child(2) {
+  width: 60%;
+}
+nav ul {
+  list-style-type: none;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+nav ul li {
+  display: flex;
+  flex-flow: row nowrap;
+}
+nav ul li a {
+  outline: none;
+  text-decoration: none;
+  color: rgb(59, 59, 59);
+  font-weight: 600;
+  font-size: 2rem;
+}
+nav ul li a.logout {
+  color: #a41e1e;
+}
+nav ul li a.logout img {
+  height: 100%;
+}
+nav ul li::after {
+  content: " ";
+  position: absolute;
+  background-color: #a997c9;
+  border-radius: 5px;
+  height: 5px;
+  width: 0%;
+  top: calc(100% + 5px);
+  transition: width 0.6s ease;
+}
+nav ul li:hover::after {
+  width: 100%;
+}
+nav .selectedMenu::after {
+  content: " ";
+  position: absolute;
+  background-color: #8860d0;
+  border-radius: 5px;
+  animation: underline 0.6s ease forwards;
+  height: 5px;
+  top: calc(100% + 5px);
+}
+nav input[type=checkbox] {
+  display: none;
+}
+@media (max-width: 599px) {
+  nav {
+    margin-bottom: 20px;
+  }
+  nav div:nth-child(2) {
+    justify-content: right;
+  }
+  nav ul {
+    display: none;
+  }
+  nav label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50px;
+    cursor: pointer;
+  }
+  nav label span {
+    background: #fff;
+    border-radius: 10px;
+    height: 5px;
+    margin: 5px 0;
+    transition: 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  }
+  nav span:nth-of-type(1) {
+    width: 50%;
+  }
+  nav span:nth-of-type(2) {
+    width: 100%;
+  }
+  nav span:nth-of-type(3) {
+    width: 75%;
+  }
+  nav input[type=checkbox]:checked ~ span:nth-of-type(1) {
+    transform-origin: bottom;
+    transform: rotatez(45deg) translate(8px, 0px);
+  }
+  nav input[type=checkbox]:checked ~ span:nth-of-type(2) {
+    transform-origin: top;
+    transform: rotatez(-45deg);
+  }
+  nav input[type=checkbox]:checked ~ span:nth-of-type(3) {
+    transform-origin: bottom;
+    width: 50%;
+    transform: translate(23px, -7px) rotatez(45deg);
+  }
+}
+
+#burger {
+  display: none;
+  position: absolute;
+  width: 100% !important;
+  z-index: 3;
+}
+@media (max-width: 599px) {
+  #burger {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+}
+#burger div {
+  height: min-content;
+  padding: 10px;
+  width: 100% !important;
+  background-color: rgba(193, 200, 228, 0.95);
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+}
+#burger div p {
+  color: rgb(59, 59, 59);
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+#burger div p.logout {
+  color: #a41e1e;
+}
+
+@keyframes underline {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Comfortaa", cursive;
+  background-image: linear-gradient(142deg, #5ab9ea 0%, #5680e9 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100%;
+}
+@media (max-width: 599px) {
+  body {
+    background-attachment: fixed;
+  }
+}
+
+.useful-width {
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+@media (max-width: 599px) {
+  .useful-width {
+    margin: 0px 10px;
+  }
+}
+
+h1 {
+  color: black;
+  font-weight: 600;
+  font-size: 5rem;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media (max-width: 599px) {
+  h1 {
+    font-size: 2.5rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+
+.invalide {
+  border: 3px solid red !important;
+}
+
+.disclaimer {
+  position: absolute;
+  text-align: left;
+}
+.disclaimer h1 {
+  text-align: center;
+  margin-bottom: 100px;
+}
+@media (max-width: 599px) {
+  .disclaimer h1 {
+    margin-bottom: 40px;
+  }
+}
+.disclaimer p {
+  color: rgb(59, 59, 59);
+  font-weight: normal;
+  font-size: 2rem;
+  line-height: normal;
+  letter-spacing: normal;
+  margin-bottom: 30px;
+}
+@media (max-width: 599px) {
+  .disclaimer p {
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+@media (max-width: 599px) {
+  .disclaimer p {
+    margin-bottom: 15px;
+  }
+}
+
+.thirdAction {
+  outline: none;
+  color: #fff;
+}
+
+.top-card {
+  border: 1px solid black;
+  padding: 50px 100px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(202, 240, 248, 0.072);
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  text-align: center;
+  box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20px 100px 20px;
+  z-index: 2;
+}
+.top-card h2 {
+  color: #fff;
+  font-weight: normal;
+  font-size: 4rem;
+  line-height: normal;
+  letter-spacing: normal;
+  text-transform: uppercase;
+}
+@media (max-width: 599px) {
+  .top-card h2 {
+    font-size: 2rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+@media (max-width: 599px) {
+  .top-card {
+    height: max-content;
+    margin-bottom: 20px;
+    padding: 25px 30px;
+  }
+}
+
+.backgroundclouds {
+  z-index: -1;
+  top: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+.backgroundclouds .clouds {
+  height: 200px;
+  position: absolute;
+}
+.backgroundclouds .clouds:nth-child(1) {
+  top: 10%;
+  left: 10%;
+}
+.backgroundclouds .clouds:nth-child(2) {
+  top: 30%;
+}
+.backgroundclouds .clouds:nth-child(3) {
+  top: 50%;
+}
+.backgroundclouds .clouds:nth-child(4) {
+  top: 70%;
+}
+@media (max-width: 599px) {
+  .backgroundclouds .clouds {
+    height: 100px;
+    transform: translateX(-40%);
+  }
+}
+
+input {
+  margin: 5px 10px 0px 10px;
+}
+input[type=text], input[type=password], input[type=email] {
+  border: 3px solid transparent;
+  text-align: center;
+  outline: none;
+  border-radius: 10px;
+  height: 5rem;
+  width: 30rem;
+  border-radius: 2.5rem;
+  font-size: 2rem;
+  color: rgb(59, 59, 59);
+  font-weight: normal;
+  font-size: 2rem;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media (max-width: 599px) {
+  input[type=text], input[type=password], input[type=email] {
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+@media (max-width: 599px) {
+  input[type=text], input[type=password], input[type=email] {
+    height: 2.5rem;
+    width: 15rem;
+  }
+}
+input[type=button], input[type=submit] {
+  border: none;
+  border-radius: 20px;
+  height: 4rem;
+  padding: 0 3rem;
+  transition: all 0.2s;
+}
+@media (max-width: 599px) {
+  input[type=button], input[type=submit] {
+    height: 2rem;
+    padding: 0 1.5rem;
+    margin: 5px 0px;
+  }
+}
+input[type=submit] {
+  color: #fff;
+  font-weight: normal;
+  font-size: 2rem;
+  line-height: normal;
+  letter-spacing: normal;
+  width: fit-content;
+  margin-top: 50px;
+  background-color: #3eb2fd;
+  background-image: linear-gradient(1deg, #4f58fd, #149bf3 99%);
+  background-size: calc(100% + 20px) calc(100% + 20px);
+}
+@media (max-width: 599px) {
+  input[type=submit] {
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+@media (max-width: 599px) {
+  input[type=submit] {
+    margin-top: 20px;
+  }
+}
+input[type=submit]:hover {
+  background-position: -20px -20px;
+  transform: scale(1.1);
+}
+input[type=button] {
+  color: #fff;
+  font-weight: normal;
+  font-size: 2rem;
+  line-height: normal;
+  letter-spacing: normal;
+  background-color: transparent;
+  border: 3px solid;
+  border-color: #4f58fd;
+}
+@media (max-width: 599px) {
+  input[type=button] {
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+@media (max-width: 599px) {
+  input[type=button] {
+    border: 2px solid;
+    border-color: #4f58fd;
+  }
+}
+input[type=button]:hover {
+  border-color: #149bf3;
+  transform: scale(1.1);
+}
+@media (max-width: 599px) {
+  input {
+    margin: 10px 5px;
+  }
+}
+
+.userInfos {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 20px;
+}
+.userInfos .input {
+  width: 50%;
+}
+.userInfos .input input {
+  width: calc(100% - 20px);
+}
+@media (max-width: 599px) {
+  .userInfos .input input {
+    width: calc(100% - 10px);
+  }
+}
+@media (max-width: 599px) {
+  .userInfos {
+    margin-bottom: 10px;
+  }
+}
+
+.loginInfos {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+}
+.loginInfos .half {
+  width: 50%;
+}
+.loginInfos .full {
+  width: calc(100% - 20px);
+}
+@media (max-width: 599px) {
+  .loginInfos .full {
+    width: calc(100% - 10px);
+  }
+}
+
+.fullwidth {
+  width: 100%;
+}
+
+.input {
+  margin-top: 20px;
+}
+.input label {
+  color: #fff;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: normal;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  margin-left: 10px;
+  margin-bottom: 25px;
+}
+@media (max-width: 599px) {
+  .input label {
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+.input p {
+  color: red;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: normal;
+  letter-spacing: normal;
+  margin: 5px 15px 15px 0px;
+  text-align: right;
+}
+@media (max-width: 599px) {
+  .input p {
+    font-size: 0.75rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+.input p span {
+  display: none;
+}
+
+.form {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.legend {
+  align-self: flex-start;
+  color: #fff;
+  font-weight: normal;
+  font-size: 1.5rem;
+  line-height: normal;
+  letter-spacing: normal;
+  margin-left: 10px;
+}
+@media (max-width: 599px) {
+  .legend {
+    font-size: 0.75rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+@media (max-width: 599px) {
+  .legend {
+    margin-left: 5px;
+  }
+}
+
+.asterisk {
+  color: red;
+}
+
+/*# sourceMappingURL=style.css.map */

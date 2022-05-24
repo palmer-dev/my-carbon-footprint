@@ -1,0 +1,85 @@
+.next-section {
+	margin-top: 150px;
+	@include for-mobile {
+		margin-top: 80px;
+	}
+}
+
+.separator {
+	width: 100%;
+	position: absolute;
+	top: 120rem;
+	height: min-content;
+}
+
+.part {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 100px;
+	@include for-mobile {
+		flex-flow: column-reverse nowrap !important;
+		margin-bottom: 50px;
+	}
+	p {
+		text-align: justify;
+		@include font-style(18, $FC-primary);
+		width: calc(80% - 80px);
+		@include for-mobile {
+			width: 100%;
+			margin-top: 10px;
+		}
+	}
+	img {
+		width: 20%;
+		@include for-mobile {
+			width: 30%;
+			margin: 0px auto;
+		}
+	}
+}
+
+.reverse {
+	flex-flow: row-reverse nowrap;
+	@include for-mobile {
+		flex-flow: column-reverse nowrap;
+	}
+}
+
+.card {
+	border: 1px solid black;
+	width: 100%;
+	padding: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	background: rgba($color: #caf0f8, $alpha: 0.072);
+	border-radius: 20px;
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	box-shadow: $standard-shadow;
+	display: flex;
+	flex-flow: row wrap;
+	place-items: center center;
+}
+
+#chart {
+	width: 100%;
+}
+
+//  ANIMATIONS
+@-webkit-keyframes jump {
+	from {
+		top: -115px;
+	}
+	to {
+		top: -105px;
+	}
+}
+@keyframes jump {
+	from {
+		top: -115px;
+	}
+	to {
+		top: -105px;
+	}
+}

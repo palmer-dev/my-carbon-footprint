@@ -1,0 +1,297 @@
+body {
+	width: 100vw;
+	overflow-x: hidden;
+}
+
+h2 {
+	@include font-style(40, $FC-contrast, bold);
+	width: 100%;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.card {
+	border: 1px solid black;
+	min-height: 200px;
+	width: 80%;
+	padding: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	background: rgba($color: #caf0f8, $alpha: 0.072);
+	border-radius: 20px;
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	text-align: center;
+	box-shadow: $standard-shadow;
+	margin-bottom: 50px;
+
+	h3 {
+		@include font-style(18, $FC-contrast, bold);
+		margin-bottom: 20px;
+	}
+
+	@include for-mobile {
+		padding: 10px;
+	}
+}
+
+.contentCard {
+	position: relative;
+	height: calc(100% - 20px);
+	width: 100%;
+	& > h4 {
+		position: absolute;
+		width: 100%;
+		top: calc(50% - 20px);
+		left: 50%;
+		transform: translate(-50%, -50%);
+		@include font-style(16, $FC-contrast);
+	}
+	div {
+		hr {
+			margin: auto;
+			margin-top: 20px;
+			width: 50%;
+			height: 3px;
+			border-top: white;
+		}
+		&:last-child hr {
+			display: none;
+		}
+	}
+}
+
+.cardItinerary {
+	border: solid 1px rgba($color: $primary, $alpha: 0.5);
+	background: rgba($color: $primary-first-variante, $alpha: 0.3);
+	border-radius: 10px;
+	box-shadow: $standard-shadow;
+	margin: 20px 0px;
+	padding: 10px 0px;
+	display: grid;
+	align-items: center;
+	justify-items: center;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	grid-template-areas:
+		". originMobile . emoji emoji"
+		"origin arrow destination emoji emoji"
+		". destinationMobile . distance co2";
+
+	position: relative;
+	left: 120px;
+	opacity: 0;
+	animation: showingCards 0.4s ease-out forwards;
+
+	p {
+		@include font-style(18, $FC-contrast);
+	}
+
+	p#origin {
+		grid-area: origin;
+		@include font-style(20, $FC-contrast, bold);
+		@include for-mobile {
+			grid-area: originMobile;
+		}
+	}
+	img#arrow {
+		grid-area: arrow;
+		max-width: 50%;
+		@include for-mobile {
+			transform: rotate(90deg);
+			max-height: 25%;
+		}
+	}
+	p#destination {
+		grid-area: destination;
+		@include font-style(20, $FC-contrast, bold);
+		@include for-mobile {
+			grid-area: destinationMobile;
+		}
+	}
+	p#transport {
+		grid-area: emoji;
+		@include font-style(60, $FC-contrast);
+		transform: translateY(-20%);
+	}
+	p#transportName {
+		grid-area: emoji;
+		@include font-style(20, $FC-contrast);
+		transform: translateY(130%);
+		// @include for-mobile{
+
+		// }
+	}
+	p#distance {
+		grid-area: distance;
+	}
+	p#co2 {
+		grid-area: co2;
+	}
+
+	.separation {
+		position: absolute;
+		left: 63%;
+		width: 2px;
+		height: 90%;
+		background: rgba($color: grey, $alpha: 0.5);
+		right: -9px;
+	}
+	#delButton {
+		position: absolute;
+		top: 0px;
+		left: 100%;
+		outline: none;
+		border: 1px solid black;
+		height: 20px;
+		width: 20px;
+		background-color: $BTN-suppression;
+		border-radius: 10px;
+		transform: translate(-50%, -50%);
+		&:active {
+			background-color: rgba($color: $BTN-suppression, $alpha: 0.4);
+		}
+	}
+}
+
+.habitsCard {
+	// background-color: red;
+	margin: 20px 0px;
+	padding: 10px 0px;
+	display: flex;
+	flex-flow: column wrap;
+	align-items: flex-start;
+	position: relative;
+	left: 120px;
+	opacity: 0;
+	animation: showingCards 0.4s ease-out forwards;
+
+	button {
+		position: absolute;
+		border: none;
+		background-color: transparent;
+		left: 95%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		transition: all 0.3s;
+		@include font-style(40, $FC-contrast);
+		&:hover {
+			@include font-style(50, $FC-contrast);
+		}
+	}
+
+	h4 {
+		margin: 20px 0px 10px 20px;
+		@include font-style(24, $FC-contrast);
+		&#dateAnswers {
+			margin: 0;
+			font-weight: bold;
+			&::after {
+				content: "";
+				// float: left;
+				background: silver;
+				width: 35%;
+				height: 4px;
+				border-radius: 3px;
+				position: absolute;
+				top: 110%;
+				left: 0px;
+			}
+		}
+
+		@include for-mobile {
+			margin: 10px 0px 5px 10px;
+		}
+	}
+	p {
+		margin-left: 40px;
+		@include font-style(16, $FC-contrast);
+		text-align: left;
+		@include for-mobile {
+			margin-left: 20px;
+		}
+	}
+
+	.footPrintSum {
+		@include font-style(26, $FC-contrast);
+		position: relative;
+		left: 93%;
+		transform: translateX(-100%);
+	}
+
+	.accuracyCalc {
+		margin-top: 0.5%;
+		@include font-style(14, $FC-contrast);
+		position: relative;
+		left: 93%;
+		transform: translateX(-100%);
+	}
+
+	@include for-mobile {
+		margin: 10px 0px;
+	}
+}
+
+.removedCard {
+	animation: removingCards 0.5s ease-in-out forwards;
+}
+
+#informations {
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 20px;
+	p {
+		@include font-style(18, $FC-contrast);
+	}
+}
+
+.boldInfos {
+	font-weight: bold;
+}
+
+#deleteAccountBtn {
+	background-color: rgba($color: #F03949,$alpha: 1);
+	border: none;
+	border-radius: 10px;
+	padding: 10px 20px;
+	position: absolute;
+	left: 80%;
+	top: 50%;
+	transform: translate(-100%, -100%);
+	transition: transform 0.5s ease-in-out;
+	@include font-style(14, $FC-contrast);
+
+	&:hover {
+		transform: translate(-100%, -100%) scale(1.2);
+	}
+}
+
+.caution {
+	transition: all 0.4s ease-in-out;
+	@include font-style(40, $FC-contrast);
+	z-index: -1;
+}
+
+//
+@keyframes showingCards {
+	from {
+		opacity: 0;
+		left: 120px;
+	}
+	to {
+		opacity: 1;
+		left: 0px;
+	}
+}
+
+@keyframes removingCards {
+	from {
+		opacity: 1;
+		left: 0px;
+	}
+	to {
+		opacity: 0;
+		left: 120px;
+	}
+}
