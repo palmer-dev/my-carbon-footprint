@@ -11,7 +11,16 @@ export function getAdvicesFromUser(callbackFunc) {
 
 function treatmentAdvices(dataUser) {
     console.log(dataUser);
-};
+    let mostUsedTransport = "";
+    dataUser.forEach(element => {
+        const valeur = element.value;
+        if (valeur != null){
+            if (valeur.match(/^\d+$/g)){
+                console.log(eval(valeur))
+            }
+        }
+    })
+}
 
 function rankingTransport(currentTransport) {
     let bestTransport = currentTransport;

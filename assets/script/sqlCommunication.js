@@ -76,7 +76,6 @@ export function selectDataBase(data, callBack = (response) => { }) {
 			var response = JSON.parse(this.responseText);
 			if (response.error) {
 				// Error while doing the sql request
-				console.log(response);
 				alert("Error while asking the server, please try again.");
 			} else {
 				callBack(response.textReturned);

@@ -59,8 +59,15 @@
 
     class advicesInfos {
         public string $id;
-        public string $key;
-        public string $value;
+        public object $habits;
+        public array $maxValue;
+        public function __construct(string $id, string $habits, string $maxValues)
+        {
+            // DEFINITION VARIABLE
+            $this->id = $id;
+            $this->habits = (object) json_decode($habits);
+            $this->maxValue = (object) json_decode($maxValues);
+        }
     }
 
     class Database {
@@ -275,13 +282,13 @@
             break;
 
         case 'getUserDataAdvices':
-            $requestSelection = "CAL Sel_user_advices";
+            $requestSelection = "CALL Sel_user_advices('$data->userid')";
             $returnData = (object) $dbAccess->sqlSelect($requestSelection);
             $returnArray = [];
-            foreach ($returnData->texeturned as $value){
-                array_push($returnArray, new advicesInfos($value->ha_id, $value->qu_short_title, $value->ha_valeur_utilisateur));
+            foreach ($returnData->textReturned as $value){
+//                array_push($returnArray, new advicesInfos($value->ha_id, $value->qu_short_title, $value->ha_valeur_utilisateur));
             }
-            $returnData->textReturned = $returnArray;
+//            $returnData->textReturned = $returnArray;
             print_r((json_encode($returnData)));
             break;
 
