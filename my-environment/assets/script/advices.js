@@ -6,7 +6,7 @@ export function getAdvicesFromUser(callbackFunc) {
         typeinserted: "getUserDataAdvices",
         userid: document.getElementById("idUser").value,
     };
-    selectDataBase(dataForRequest, treatmentAdvices());
+    selectDataBase(dataForRequest, treatmentAdvices);
 }
 
 function treatmentAdvices(dataUser) {
