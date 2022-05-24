@@ -129,6 +129,7 @@
 						border-radius: 22px;
 						@include font-style(18, black);
 						cursor: pointer;
+						text-align: center;
 						@include for-mobile {
 							padding: 4px 11px;
 						}

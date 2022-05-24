@@ -10,7 +10,7 @@ function main() {
 	// Getting DATA
 	getItineraryFromUser();
 	getHabitsFromUser();
-	getAdvicesFromUser();
+	getAdvicesFromUser(displayAdvicesFromUser);
 
 	// Preparing page
 	prepareButtonHover();
@@ -109,7 +109,9 @@ function displayHabitsFromUser(habitsUser) {
 	});
 }
 
-function displayAdvicesFromUser(Advices) { }
+function displayAdvicesFromUser(Advices) {
+	// GENERATION ADVICE CARD TO DEFINE
+}
 
 // Delete functions
 function removeItinerary(idToRemove) {
@@ -293,7 +295,9 @@ function createCardHabits(
 			(energyProduction != "Not answered"
 				? ` And it uses energy produced by ${energyProduction}.</p>`
 				: "")
-			: "";
+			: (energyProduction != "Not answered"
+				? `<h4>My House</h4><p>My house uses energy produced by ${energyProduction}.</p>`
+				: "");
 
 	newHabitsCards +=
 		meatConsumption != "Not answered"

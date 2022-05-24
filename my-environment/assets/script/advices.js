@@ -1,31 +1,64 @@
 import { selectDataBase } from "../../../assets/script/sqlCommunication.js";
 
+let fonctionCallBackGlobal;
+
 export function getAdvicesFromUser(callbackFunc) {
     // FUNCTION TO DEFINE
     const dataForRequest = {
         typeinserted: "getUserDataAdvices",
         userid: document.getElementById("idUser").value,
     };
+    fonctionCallBackGlobal = callbackFunc;
     selectDataBase(dataForRequest, treatmentAdvices);
 }
 
 function treatmentAdvices(dataUser) {
-    console.log(dataUser);
-    let mostUsedTransport = "";
-    dataUser.forEach(element => {
-        const valeur = element.value;
-        if (valeur != null){
-            if (valeur.match(/^\d+$/g)){
-                console.log(eval(valeur))
-            }
-        }
-    })
+    const transportMeanMostlyUsedByKm = Object.keys(dataUser.maxValue[0])[0].replace(" trip", "");
+    const transportMeanMostlyUsedQuestion = dataUser.habits["Most used transport means"];
+    const adviceTransport = rankingTransport(transportMeanMostlyUsedQuestion);
+
+    const energyUsedAtHome = dataUser.habits["Energie at home"];
+    const adviceEnergyAtHome = rankingEnergyProduction(energyUsedAtHome);
+
+    const heatingSystem = dataUser.habits["Heating system"];
+    const adviceHeatingSystem = rankingHeatingSystem(heatingSystem);
+
+    const carFuel = dataUser.habits["Energy consumed"];
+    const adviceCarFuel = rankingCarFuel(carFuel);
+
+    const seasonalProduct = dataUser.habits["Seasonal product consumption"];
+    const adviceSeasonalProduct = rankingSeasonalProduct(seasonalProduct);
+
+    // PREPARATION FOR RETURN
+    let listAdvices = [];
+    if (transportMeanMostlyUsedQuestion != adviceTransport) {
+        listAdvices.push({ title: "Transport mean", advice: `You may better use the ${adviceTransport} than the ${transportMeanMostlyUsedQuestion} for your trips.`, profit: getProfit("transportMean", transportMeanMostlyUsedQuestion, adviceTransport) })
+    }
+
+    if (energyUsedAtHome != adviceEnergyAtHome) {
+        listAdvices.push({ title: "Energy at home", advice: `You may better use ${adviceEnergyAtHome} energy than the ${energyUsedAtHome} energy for your home.`, profit: getProfit("energyAtHome", energyUsedAtHome, adviceEnergyAtHome) })
+    }
+    if (heatingSystem != adviceHeatingSystem) {
+        listAdvices.push({ title: "Heating system", advice: `You may better use ${adviceHeatingSystem} energy than the ${heatingSystem} energy for your heating system.`, profit: getProfit("heatingSystem", heatingSystem, adviceHeatingSystem) })
+    }
+    if (carFuel != adviceCarFuel) {
+        listAdvices.push({ title: "Car fuel", advice: `You may better use a car that uses ${adviceCarFuel} than a car that uses ${carFuel}.`, profit: getProfit("carFuel", carFuel, adviceCarFuel) })
+    }
+    if (seasonalProduct == "No") {
+        listAdvices.push({ title: "Eating seasonal products", advice: adviceSeasonalProduct, profit: getProfit("seasonalProducts", seasonalProduct, adviceSeasonalProduct) })
+    }
+
+    // CALL A FUNCTION THAT WILL GENERATE CARDS
+    fonctionCallBackGlobal(listAdvices);
 }
 
 function rankingTransport(currentTransport) {
     let bestTransport = currentTransport;
     switch (bestTransport) {
-        case 'Car' || 'Taxi':
+        case 'Car':
+            bestTransport = "Metro";
+            break;
+        case 'Taxi':
             bestTransport = "Metro";
             break;
         case 'Bus':
@@ -125,4 +158,8 @@ function rankingSeasonalProduct(currentSeasonalConsumption) {
         case 'Yes':
             return "It's good to eat seasonal product! Great job!"
     }
+}
+
+function getProfit(type, oldMethod, newMethod) {
+    // To define Calcul profite between old and new methode of an 
 }

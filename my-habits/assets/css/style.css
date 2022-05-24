@@ -514,6 +514,7 @@ nav input[type=checkbox] {
   line-height: normal;
   letter-spacing: normal;
   cursor: pointer;
+  text-align: center;
 }
 @media (max-width: 599px) {
   .top .topleft .quiz .descriptionQuiz div label {
