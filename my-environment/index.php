@@ -22,7 +22,12 @@
 </head>
 
 <body>
+<!-- LOADER -->
+<div id="loader" class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+<!-- END LOADER -->
 
+<!-- MAIN PAGE -->
+<div id="mainPage">
     <!-- Elements who need full width -->
     <!-- MENU -->
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/php/navigation.php"; ?>
@@ -48,7 +53,7 @@
         <div class="card">
             <h3 class="titreCarte">Advices</h3>
             <div class="contentCard" id="advices">
-                 <h4 id="advicesNoData">We can not give you any advices if you do not answer the habits quiz 😕</h4>
+                 <h4 id="advicesNoData">We do not have any advice for you, you have already a good lifestyle for the carbon footprint! 😃</h4>
             </div>
         </div>
         <div class="card">
@@ -73,6 +78,7 @@
         </div>
     </div>
     <input type="hidden" name="idUser" id="idUser" value="<?= $userId ?>">
+</div>
 </body>
 <script src="/my-habits/assets/script/calculatorfct.js"></script>
 <script type="module" src="./assets/script/script.js"></script>

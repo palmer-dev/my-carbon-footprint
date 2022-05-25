@@ -1,16 +1,11 @@
-var DataGouv;
 var DataCO2;
-
-export function setDataGouv(data) {
-	DataGouv = data;
-}
 
 export function setDataCO2(data) {
 	DataCO2 = data;
 }
 
 // INCLUDE MODULES
-import { getGouvData, getEmiterData } from "./dataLookup.js";
+import { getEmiterData } from "./dataLookup.js";
 
 // FONCTIONS OBSERVER
 const observerDivSeparator = new ResizeObserver((entries) => {
@@ -52,7 +47,6 @@ export function getObserver() {
 
 function init() {
 	observerDivSeparator.observe(document.getElementById("sectionInSeparator"));
-	getGouvData();
 	getEmiterData();
 }
 

@@ -6,8 +6,6 @@
     $userEmail = $_SESSION['email'];
     $userId = $_SESSION['userid'];
 
-    // echo "erer";
-    // print_r($_SESSION["userAnswers"]["itinerary"]);
 ?>
 
 <!DOCTYPE html>
@@ -16,10 +14,15 @@
 <head>
     <?php include $_SERVER["DOCUMENT_ROOT"] . "/assets/php/head.php"; ?>
     <title>My Carbon Footprint</title>
-    <script src="/assets/script/animations.js"></script>
 </head>
 
 <body>
+<!-- LOADER -->
+<div id="loader" class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+<!-- END LOADER -->
+
+<!-- MAIN PAGE -->
+<div id="mainPage">
 
     <!-- Elements who need full width -->
     <!-- MENU -->
@@ -79,6 +82,7 @@
     <input type="hidden" name="idUser" id="idUser" value="<?= $userId ?>">
     <script src="./assets/script/calculatorfct.js"></script>
     <script type="module" src="./assets/script/script.js"></script>
+</div>
 </body>
 <?php if ($_SESSION["connected"] == true) : ?>
 <script>

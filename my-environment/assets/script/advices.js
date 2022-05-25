@@ -13,6 +13,8 @@ export function getAdvicesFromUser(callbackFunc) {
 }
 
 function treatmentAdvices(dataUser) {
+    if (dataUser == null){return}
+
     const transportMeanMostlyUsedByKm = Object.keys(dataUser.maxValue[0])[0].replace(" trip", "");
     const transportMeanMostlyUsedQuestion = dataUser.habits["Most used transport means"];
     const adviceTransport = rankingTransport(transportMeanMostlyUsedQuestion);
@@ -32,20 +34,20 @@ function treatmentAdvices(dataUser) {
     // PREPARATION FOR RETURN
     let listAdvices = [];
     if (transportMeanMostlyUsedQuestion != adviceTransport) {
-        listAdvices.push({ title: "Transport mean", advice: `You may better use the ${adviceTransport} than the ${transportMeanMostlyUsedQuestion} for your trips.`, profit: getProfit("transportMean", transportMeanMostlyUsedQuestion, adviceTransport, dataUser) })
+        listAdvices.push({ id: generateUUID(), title: "Transport mean", advice: `You may better use the ${adviceTransport} than the ${transportMeanMostlyUsedQuestion} for your trips.`, currentCO2: getCurrentCO2(dataUser), profit: getProfit("transportMean", transportMeanMostlyUsedQuestion, adviceTransport, dataUser) })
     }
 
     if (energyUsedAtHome != adviceEnergyAtHome) {
-        listAdvices.push({ title: "Energy at home", advice: `You may better use ${adviceEnergyAtHome} energy than the ${energyUsedAtHome} energy for your home.`, profit: getProfit("energyAtHome", energyUsedAtHome, adviceEnergyAtHome, dataUser) })
+        listAdvices.push({ id: generateUUID(), title: "Energy at home", advice: `You may better use ${adviceEnergyAtHome} energy than the ${energyUsedAtHome} energy for your home.`, currentCO2: getCurrentCO2(dataUser), profit: getProfit("energyAtHome", energyUsedAtHome, adviceEnergyAtHome, dataUser) })
     }
     if (heatingSystem != adviceHeatingSystem) {
-        listAdvices.push({ title: "Heating system", advice: `You may better use ${adviceHeatingSystem} than the ${heatingSystem} for your heating system.`, profit: getProfit("heatingSystem", heatingSystem, adviceHeatingSystem, dataUser) })
+        listAdvices.push({ id: generateUUID(), title: "Heating system", advice: `You may better use ${adviceHeatingSystem} than the ${heatingSystem} for your heating system.`, currentCO2: getCurrentCO2(dataUser), profit: getProfit("heatingSystem", heatingSystem, adviceHeatingSystem, dataUser) })
     }
     if (carFuel != adviceCarFuel) {
-        listAdvices.push({ title: "Car fuel", advice: `You may better use a car that uses ${adviceCarFuel} than a car that uses ${carFuel}.`, profit: getProfit("carFuel", carFuel, adviceCarFuel, dataUser) })
+        listAdvices.push({ id: generateUUID(), title: "Car fuel", advice: `You may better use a car that uses ${adviceCarFuel} than a car that uses ${carFuel}.`, currentCO2: getCurrentCO2(dataUser), profit: getProfit("carFuel", carFuel, adviceCarFuel, dataUser) })
     }
     if (seasonalProduct == "No") {
-        listAdvices.push({ title: "Eating seasonal products", advice: adviceSeasonalProduct, profit: getProfit("seasonalProducts", seasonalProduct, adviceSeasonalProduct, dataUser) })
+        listAdvices.push({ id: generateUUID(), title: "Eating seasonal products", advice: adviceSeasonalProduct, currentCO2: getCurrentCO2(dataUser), profit: getProfit("seasonalProducts", seasonalProduct, adviceSeasonalProduct, dataUser) })
     }
 
     // CALL A FUNCTION THAT WILL GENERATE CARDS
@@ -160,7 +162,7 @@ function rankingSeasonalProduct(currentSeasonalConsumption) {
     }
 }
 
-function getProfit(type, oldMethod, newMethod, allUserData) {
+function getCurrentCO2(allUserData){
     // To define Calcul profite between old and new methode of an
     let kmVoiture = parseInt(allUserData.habits["Car trip"]) || 0;
     let typeVoiture = allUserData.habits["Energy consumed"] === "" ? "Electricity": allUserData.habits["Energy consumed"];
@@ -178,12 +180,26 @@ function getProfit(type, oldMethod, newMethod, allUserData) {
     let difference = 0;
     let data = loadDataJSON("/my-habits/assets/json/data.json");
 
-    if (type == "heatingSystem") {
-        console.log(heatingConsommation(findInJson(JSON.parse(data), "chauffage"+oldMethod), sizeHome));
-        console.log(heatingConsommation(findInJson(JSON.parse(data), "chauffage"+newMethod), sizeHome));
-        console.log();
-        console.log();
-    }
+    return totalConsommation(kmVoiture,typeVoiture,kmBus,kmPlane,kmTrain,kmMetro,typeHeating,sizeHome,typeElectricity,freqmeat,local,JSON.parse(data)).toFixed(2);
+}
+
+function getProfit(type, oldMethod, newMethod, allUserData) {
+    // To define Calcul profite between old and new methode of an
+    let kmVoiture = parseInt(allUserData.habits["Car trip"]) || 0;
+    let typeVoiture = allUserData.habits["Energy consumed"] === "" ? "Electricity": allUserData.habits["Energy consumed"];
+    let kmBus = parseInt(allUserData.habits["Bus trip"]) || 0;
+    let kmPlane = parseInt(allUserData.habits["Plane trip"]) || 0;
+    let kmTrain = parseInt(allUserData.habits["Train trip"]) || 0;
+    let kmMetro = parseInt(allUserData.habits["Metro trip"]) || 0;
+    let typeHeating = allUserData.habits["Heating system"] === "" ? "Electricity": allUserData.habits["Heating system"];
+    let sizeHome = parseInt(allUserData.habits["Home size"]) || 0;
+    let typeElectricity = allUserData.habits["Energie at home"] === "" ? "Nuclear": allUserData.habits["Energie at home"];
+    let freqmeat = parseInt(allUserData.habits["Meat consumption"]) || 0;
+    let local = allUserData.habits["local product consumption"] === "" ? "No" : allUserData.habits["local product consumption"];
+
+    // VARIABLES LOCALLY DEFINED
+    let difference = 0;
+    let data = loadDataJSON("/my-habits/assets/json/data.json");
 
     let oldValue = 0;
     let newValue = 0;
@@ -265,4 +281,30 @@ function loadDataJSON(filePath, mimeType)
     else {
         return null;
     }
+}
+
+function generateUUID() {
+    // Public Domain/MIT
+    var d = new Date().getTime(); //Timestamp
+    var d2 =
+        (typeof performance !== "undefined" &&
+            performance.now &&
+            performance.now() * 1000) ||
+        0; //Time in microseconds since page-load or 0 if unsupported
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+        /[xy]/g,
+        function (c) {
+            var r = Math.random() * 16; //random number between 0 and 16
+            if (d > 0) {
+                //Use timestamp until depleted
+                r = (d + r) % 16 | 0;
+                d = Math.floor(d / 16);
+            } else {
+                //Use microseconds since page-load if supported
+                r = (d2 + r) % 16 | 0;
+                d2 = Math.floor(d2 / 16);
+            }
+            return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
+        }
+    );
 }

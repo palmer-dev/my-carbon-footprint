@@ -1,53 +1,6 @@
 // INCLUDES MODULES
 import { chartGenerator } from "./chartGenerator.js";
-import { setDataCO2, setDataGouv, getObserver } from "./script.js";
-
-// DATA FROM FRENCH DATA BASE CARBON
-export function getGouvData() {
-	var url =
-		"https://koumoul.com/data-fair/api/v1/datasets/base-carbone(r)/data-files";
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.open("GET", url, true);
-	xmlHttp.send(null);
-
-	xmlHttp.onload = function (xml1e) {
-		var fichierCSV = JSON.parse(xmlHttp.responseText)[0]["url"];
-
-		var dataCSVfile = new XMLHttpRequest();
-		dataCSVfile.overrideMimeType("text/plain; charset=ISO-8859-1");
-		dataCSVfile.open("GET", fichierCSV, true);
-		dataCSVfile.send(null);
-
-		dataCSVfile.onload = function (xml2e) {
-			var dataCSVbrut = dataCSVfile.responseText;
-
-			// TRAITEMENT DES DONNéES
-			dataCSVbrut = dataCSVbrut.split(/\r\n|\n/);
-
-			var dataCSV = [];
-			var headers = dataCSVbrut[0].split(";");
-
-			for (let ligne = 1; ligne < dataCSVbrut.length; ligne++) {
-				var dataLigne = dataCSVbrut[ligne];
-				var nvDataLigne = {};
-				var tmp = dataLigne.split(";");
-				for (let colonne = 0; colonne < tmp.length; colonne++) {
-					nvDataLigne[headers[colonne]] = tmp[colonne];
-				}
-				dataCSV.push(nvDataLigne);
-			}
-
-			console.log(
-				"Données gouvernementales mises à jour le " +
-					new Date(JSON.parse(xmlHttp.responseText)[0]["updatedAt"])
-						.toLocaleString()
-						.replace(", ", " à ")
-			);
-
-			setDataGouv(dataCSV);
-		};
-	};
-}
+import { setDataCO2, getObserver } from "./script.js";
 
 // DATA FROM THE INTERNATIONAL DATA BASE IN CARBON EMISSION
 export function getEmiterData() {

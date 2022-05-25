@@ -13,14 +13,17 @@
 <head>
     <?php include $_SERVER["DOCUMENT_ROOT"] . "/assets/php/head.php"; ?>
     <title>My Carbon Footprint</title>
-    <script src="/assets/script/utils.js"></script>
-    <script src="/assets/script/animations.js"></script>
     <script src="./assets/script/sqlCommunication.js"></script>
     <script src="/my-itinerary/assets/script/script.js"></script>
 </head>
 
 <body>
+<!-- LOADER -->
+<div id="loader" class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+<!-- END LOADER -->
 
+<!-- MAIN PAGE -->
+<div id="mainPage">
     <!-- Elements who need full width -->
     <!-- MENU -->
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/php/navigation.php"; ?>
@@ -75,6 +78,7 @@
 
     </div>
     <input type="hidden" name="idUser" id="idUser" value="<?= $userId ?>">
+</div>
 </body>
 <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAPkb9swgCy7sy02SeLUuT8B7apC0Hh94&libraries=geometry,places&callback=initMap"

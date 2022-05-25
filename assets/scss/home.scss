@@ -24,7 +24,7 @@
 	}
 	p {
 		text-align: justify;
-		@include font-style(18, $FC-primary);
+		@include font-style(18, $FC-contrast);
 		width: calc(80% - 80px);
 		@include for-mobile {
 			width: 100%;

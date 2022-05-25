@@ -27,6 +27,11 @@ body {
 	}
 }
 
+#mainPage {
+	opacity: 0;
+	transition: opacity .2s ease-in-out;
+}
+
 .useful-width {
 	max-width: 1240px;
 	margin-left: auto;
@@ -40,7 +45,7 @@ body {
 }
 
 h1 {
-	@include font-style(50, black, 600);
+	@include font-style(50, $FC-contrast, 600);
 }
 
 .invalide {

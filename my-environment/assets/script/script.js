@@ -5,6 +5,8 @@ import {
 
 import { getAdvicesFromUser } from "./advices.js";
 
+// GLOBAL VARIABLE
+let actualTotal = 0;
 
 function main() {
 	// Getting DATA
@@ -14,13 +16,6 @@ function main() {
 
 	// Preparing page
 	prepareButtonHover();
-
-	// Initializing
-	const btn = document.getElementById("deleteAccountBtn");
-	const positionsBtn = [
-		btn.offsetTop - btn.offsetHeight / 2,
-		btn.offsetLeft - btn.offsetWidth / 2,
-	];
 
 	const listCautionP = document.querySelectorAll(".caution");
 
@@ -32,9 +27,6 @@ function main() {
 		element.style.transform = "translate(-50%, -100%)";
 	}
 }
-
-// ****** GLOBAL VARIABLES ****** //
-const timingOpacity = 500;
 
 function getItineraryFromUser() {
 	const dataForRequest = {
@@ -58,9 +50,8 @@ function getHabitsFromUser() {
 // Display functions
 function displayItineraryFromUser(itinerariesUser) {
 	// Cleaning the container div
+	if (itinerariesUser.length == 0){return}
 	cleaningCardById("itinerary");
-
-	const itineraryNoData = document.getElementById("itineraryNoData");
 
 	// Displaying data
 	itinerariesUser.forEach((element) => {
@@ -77,8 +68,7 @@ function displayItineraryFromUser(itinerariesUser) {
 }
 
 function displayHabitsFromUser(habitsUser) {
-	const habitsNoData = document.getElementById("habitsNoData");
-
+	if (habitsUser.length == 0){return}
 	let options = {
 		weekday: "long",
 		year: "numeric",
@@ -87,7 +77,6 @@ function displayHabitsFromUser(habitsUser) {
 	};
 
 	cleaningCardById("habits");
-
 	const data = loadDataJSON("/my-habits/assets/json/data.json");
 
 	habitsUser.forEach((poolOfAnswers) => {
@@ -112,7 +101,7 @@ function displayHabitsFromUser(habitsUser) {
 			poolOfAnswers.userAnswers["Heating system"],
 			poolOfAnswers.userAnswers["Energie at home"],
 			poolOfAnswers.userAnswers["Meat consumption"],
-			poolOfAnswers.userAnswers["Seasonal product consumption"],
+			poolOfAnswers.userAnswers["local product consumption"],
 			poolOfAnswers.userAnswers["Your car"],
 			poolOfAnswers.userAnswers["Size"],
 			poolOfAnswers.userAnswers["Energy consumed"],
@@ -122,34 +111,40 @@ function displayHabitsFromUser(habitsUser) {
 			totalConsommation(kmVoiture,typeVoiture,kmBus,kmPlane,kmTrain,kmMetro,typeHeating,sizeHome,typeElectricity,freqmeat,local,JSON.parse(data)).toFixed(2)
 		);
 	});
-	const poolOfAnswers = habitsUser[0];
-	const kmVoiture = parseInt(poolOfAnswers.userAnswers["Car trip"].replace("Not answered","")) || 0;
-	const typeVoiture = poolOfAnswers.userAnswers["Energy consumed"] === "Not answered" ? "Electricity": poolOfAnswers.userAnswers["Energy consumed"];
-	const kmBus = parseInt(poolOfAnswers.userAnswers["Bus trip"].replace("Not answered","")) || 0;
-	const kmPlane = parseInt(poolOfAnswers.userAnswers["Plane trip"].replace("Not answered","")) || 0;
-	const kmTrain = parseInt(poolOfAnswers.userAnswers["Train trip"].replace("Not answered","")) || 0;
-	const kmMetro = parseInt(poolOfAnswers.userAnswers["Metro trip"].replace("Not answered","")) || 0;
-	const typeHeating = poolOfAnswers.userAnswers["Heating system"] === "Not answered" ? "Electricity": poolOfAnswers.userAnswers["Heating system"];
-	const sizeHome = parseInt(poolOfAnswers.userAnswers["Home size"].replace("Not answered","")) || 0;
-	const typeElectricity = poolOfAnswers.userAnswers["Energie at home"] === "Not answered" ? "Nuclear": poolOfAnswers.userAnswers["Energie at home"];
-	const freqmeat = parseInt(poolOfAnswers.userAnswers["Meat consumption"].replace("Not answered","")) || 0;
-	const local = poolOfAnswers.userAnswers["local product consumption"] === "Not answered" ? "No" : poolOfAnswers.userAnswers["local product consumption"];
-
-	const totalConso = totalConsommation(kmVoiture,typeVoiture,kmBus,kmPlane,kmTrain,kmMetro,typeHeating,sizeHome,typeElectricity,freqmeat,local,JSON.parse(data)).toFixed(2);
-
-	const containerAdvices = document.getElementById("advices");
-	const total = document.createElement("p");
-	total.classList.add("totalCO2");
-	total.textContent = `${totalConso}kg CO2/year`;
-	containerAdvices.appendChild(total);
 }
 
 function displayAdvicesFromUser(advices) {
 	// GENERATION ADVICE CARD TO DEFINE
+	if (advices[0] == undefined){return}
+
+	cleaningCardById("advices");
+
+	const co2Total = document.getElementById("totalCO2");
+	if(co2Total !== null){
+		co2Total.remove();
+	}
+
+	actualTotal = advices[0].currentCO2;
+
 	for (const advicesKey in advices) {
 		const advice = advices[advicesKey];
-		createCardAdvice(advice.title, advice.advice,advice.profit, advicesKey);
+		createCardAdvice(advice.id, advice.title, advice.advice,advice.profit, advicesKey);
 	}
+	addTotalCurrentToAdvice();
+}
+
+function addTotalCurrentToAdvice(){
+	const containerAdvices = document.getElementById("advices");
+	const total = document.createElement("p");
+	total.id = "totalCO2";
+	total.classList.add("totalCO2");
+	total.textContent = `${actualTotal}kg CO2/year`;
+	if (document.getElementById("totalCO2") != undefined){
+		document.getElementById("totalCO2").textContent = `${actualTotal}kg CO2/year`;
+	}else{
+		containerAdvices.appendChild(total);
+	}
+
 }
 
 // Delete functions
@@ -166,14 +161,22 @@ function removeItinerary(idToRemove) {
 }
 
 function removeHabits(idToRemove) {
-	// console.log(idToRemove);
 	const dataForRequest = {
 		typeinserted: "deleteUserHabits",
 		userid: document.getElementById("idUser").value,
 		habitsid: idToRemove,
 	};
+
 	removeElementDataBase(dataForRequest, () => {
 		removeCardById(idToRemove);
+		setTimeout(()=>{
+			const co2Total = document.getElementById("totalCO2");
+			if(co2Total !== null){
+				co2Total.remove();
+			}
+			getAdvicesFromUser(displayAdvicesFromUser);
+			},500
+		);
 	});
 }
 
@@ -193,26 +196,14 @@ function removeUserProfile() {
 // Global functions
 function cleaningCardById(id) {
 	document.querySelectorAll(`#${id}`).forEach((element) => {
-		console.log();
 		element.querySelectorAll("div").forEach((divElement) => {
-			divElement.style.display = "none";
-		});
-		element.querySelectorAll("hr").forEach((hrElement) => {
-			hrElement.style.display = "none";
+			removeCardById(divElement.id);
 		});
 	});
 }
 
 // CREATING CARDS FUNCTION
-function createCardItinerary(
-	id,
-	origin,
-	destination,
-	transport,
-	distance,
-	co2,
-	nOCard
-) {
+function createCardItinerary(id,origin,destination,transport,distance,co2,nOCard) {
 	const containerItinerary = document.getElementById("itinerary");
 	const cardItinerary = document.createElement("div");
 	const originP = document.createElement("p");
@@ -274,32 +265,18 @@ function createCardItinerary(
 	containerItinerary.getElementsByTagName("h4")[0].style.display = "none";
 }
 
-function createCardHabits(
-	idCard,
-	dateAnswer,
-	heatProduction,
-	energyProduction,
-	meatConsumption,
-	seasonalProduct,
-	hasACar,
-	carSize,
-	carEnergy,
-	travelUse,
-	nOCard,
-	transportsMean,
-	co2Value
-) {
+function createCardHabits(idCard,dateAnswer,heatProduction,energyProduction,meatConsumption,seasonalProduct,hasACar,carSize,carEnergy,travelUse,nOCard,transportsMean,co2Value) {
 	const containerHabits = document.getElementById("habits");
 	const habitsCard = document.createElement("div");
 	habitsCard.classList.add("habitsCard");
 	habitsCard.style.animationDelay = (0.3 * nOCard).toString() + "s";
 
-	const eatSeaonal =
-		seasonalProduct == true
+	const eatSeasonal =
+		seasonalProduct === "Yes"
 			? " and I do eat seasonal products."
-			: seasonalProduct == false
+			: seasonalProduct === "No"
 				? " and I do not particularly eat seasonal products."
-				: ".";
+				: "";
 	let travelMeans = "";
 
 	for (const [key, value] of Object.entries(transportsMean)) {
@@ -342,7 +319,7 @@ function createCardHabits(
 	newHabitsCards +=
 		meatConsumption != "Not answered"
 			? `	<h4>My eating habits</h4>
-				<p>I eat ${meatConsumption} times a week meat${eatSeaonal}</p>`
+				<p>I eat ${meatConsumption} times a week meat${eatSeasonal}</p>`
 			: "";
 
 	newHabitsCards +=
@@ -389,18 +366,19 @@ function createCardHabits(
 	containerHabits.getElementsByTagName("h4")[0].style.display = "none";
 }
 
-function createCardAdvice(title, textAdvice, profit, noCard) {
+function createCardAdvice(id, title, textAdvice, profit, noCard) {
 	const containerAdvices = document.getElementById("advices");
 	const advicesNoData = document.getElementById("advicesNoData");
 	const adviceCard = document.createElement("div");
 	adviceCard.classList.add("adviceCard");
 	adviceCard.style.animationDelay = (0.3 * noCard).toString() + "s";
+	adviceCard.id = id;
 
 	let newHabitsCards = "";
 
 	newHabitsCards += `<h3>${title}</h3>`;
 	newHabitsCards += `<p>${textAdvice}</p>`;
-	newHabitsCards += `<p class="profitValue">${profit}kg CO2/year</p>`;
+	newHabitsCards += `<p class="profitValue" id="co2AdviceTotal" style="opacity: 1">${profit}kg CO2/year</p>`;
 
 	adviceCard.innerHTML = newHabitsCards;
 
@@ -455,11 +433,11 @@ function prepareButtonHover() {
 
 	btn.addEventListener("mouseleave", () => {
 		for (let panel = 0; panel < listCautionP.length; panel++) {
-			const element = listCautionP[panel];
-			element.style.position = "absolute";
-			element.style.top = "45%";
-			element.style.left = "73%";
-			element.style.transform = "translate(-50%, -100%)";
+			const {style} = listCautionP[panel];
+			style.position = "absolute";
+			style.top = "45%";
+			style.left = "73%";
+			style.transform = "translate(-50%, -100%)";
 		}
 	});
 
@@ -475,18 +453,13 @@ function prepareButtonHover() {
 	});
 
 	btn.addEventListener("click", () => {
-		if (
-			confirm(
-				"Are you sure to delete your profile? All your data, quiz, itineraries will be delete from the database"
-			)
-		) {
+		if (confirm("Are you sure to delete your profile? All your data, quiz, itineraries will be delete from the database")) {
 			removeUserProfile();
 		}
 	});
 }
 
-function loadDataJSON(filePath, mimeType)
-{
+function loadDataJSON(filePath, mimeType) {
 	var xmlhttp=new XMLHttpRequest();
 	xmlhttp.open("GET",filePath,false);
 	xmlhttp.overrideMimeType("application/json");

@@ -12,7 +12,12 @@
 </head>
 
 <body>
+<!-- LOADER -->
+<div id="loader" class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+<!-- END LOADER -->
 
+<!-- MAIN PAGE -->
+<div id="mainPage">
     <!-- Elements who need full width -->
     <!-- MENU -->
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/assets/php/navigation.php"; ?>
@@ -48,6 +53,7 @@
     </div>
 
     <script type="module" src="./assets/script/script.js"></script>
+</div>
 </body>
 
 </html>

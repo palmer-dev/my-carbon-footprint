@@ -233,7 +233,7 @@
 		}
 		.titleP1,
 		.titleP2 {
-			@include font-style(24, $FC-primary, bolder);
+			@include font-style(24, $FC-contrast, bolder);
 			margin-bottom: 20px;
 			@include for-mobile {
 				margin-bottom: 10px;
@@ -242,12 +242,13 @@
 		}
 		.descriptionP1,
 		.descriptionP2 {
-			@include font-style(18, $FC-primary);
+			@include font-style(18, $FC-contrast);
 			text-align: justify;
 		}
 	}
 	img {
 		width: 20%;
+		filter: invert(100%) brightness(200%);
 		@include for-mobile {
 			width: 30%;
 		}

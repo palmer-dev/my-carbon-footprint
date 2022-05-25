@@ -7,11 +7,15 @@
 <head>
     <?php include './assets/php/head.php' ?>
     <title>My Carbon Footprint</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./assets/script/animations.js"></script>
 </head>
 
 <body>
+<!-- LOADER -->
+<div id="loader" class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+<!-- END LOADER -->
+
+<!-- MAIN PAGE -->
+<div id="mainPage">
 
     <!-- Elements who need full width -->
     <!-- MENU -->
@@ -82,6 +86,7 @@
     </div>
     <!-- SCRIPT DE RéCUPéRATION DES DONNéES -->
     <script type="module" src="./assets/script/script.js"></script>
+</div>
 </body>
 
 </html>
