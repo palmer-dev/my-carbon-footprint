@@ -113,7 +113,9 @@ function displayAdvicesFromUser(advices) {
 	// GENERATION ADVICE CARD TO DEFINE
 	console.log(advices);
 	for (const advicesKey in advices) {
-		createCardAdvice(advicesKey.title, advicesKey.advice,advicesKey.profit, advices.indexOf(advicesKey));
+		const advice = advices[advicesKey];
+		console.log(advice);
+		createCardAdvice(advice.title, advice.advice,advice.profit, advicesKey);
 	}
 }
 
@@ -362,8 +364,10 @@ function createCardAdvice(title, textAdvice, profit, noCard) {
 	let newHabitsCards = "";
 
 	newHabitsCards += `<h3>${title}</h3>`;
+	newHabitsCards += `<p>${textAdvice}</p>`;
+	newHabitsCards += `<p class="profitValue">${profit}kg CO2/an</p>`;
 
-	newHabitsCards += `<h3>${title}</h3>`;
+	adviceCard.innerHTML = newHabitsCards;
 
 	containerAdvices.appendChild(adviceCard);
 }

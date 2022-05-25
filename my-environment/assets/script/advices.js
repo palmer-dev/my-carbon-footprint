@@ -39,7 +39,7 @@ function treatmentAdvices(dataUser) {
         listAdvices.push({ title: "Energy at home", advice: `You may better use ${adviceEnergyAtHome} energy than the ${energyUsedAtHome} energy for your home.`, profit: getProfit("energyAtHome", energyUsedAtHome, adviceEnergyAtHome) })
     }
     if (heatingSystem != adviceHeatingSystem) {
-        listAdvices.push({ title: "Heating system", advice: `You may better use ${adviceHeatingSystem} energy than the ${heatingSystem} energy for your heating system.`, profit: getProfit("heatingSystem", heatingSystem, adviceHeatingSystem) })
+        listAdvices.push({ title: "Heating system", advice: `You may better use ${adviceHeatingSystem} than the ${heatingSystem} for your heating system.`, profit: getProfit("heatingSystem", heatingSystem, adviceHeatingSystem) })
     }
     if (carFuel != adviceCarFuel) {
         listAdvices.push({ title: "Car fuel", advice: `You may better use a car that uses ${adviceCarFuel} than a car that uses ${carFuel}.`, profit: getProfit("carFuel", carFuel, adviceCarFuel) })

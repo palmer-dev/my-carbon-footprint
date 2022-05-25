@@ -197,7 +197,6 @@ function changeDisplayForResults() {
 }
 
 function calculateCO2WithTheAnswers() {
-	console.log(questions);
 	var kmVoiture = questions[1].userAnswer || 0;
 	var typeVoiture = questions[4].userAnswer || "Gasoline";
 	var kmPlane = questions[5].userAnswer || 0;
@@ -206,11 +205,14 @@ function calculateCO2WithTheAnswers() {
 	var kmBus = questions[8].userAnswer || 0;
 	var typeHeating = questions[9].userAnswer || "Electricity";
 	var typeElectricity = questions[10].userAnswer || "Nuclear";
-	var sizeHome = questions[13].userAnswer || 50;
+	var freqmeat = questions[11].userAnswer || 0;
+	var local = questions[12].userAnswer || "No"
+	var sizeHome = questions[13].userAnswer || 0;
 	$.get("./assets/json/data.json", function (data) {
-		console.log("prod electricity" + electricityProduction(typeElectricity,sizeHome,data));	
-		console.log("chauffage " + heatingConsommation(findInJson(data, "chauffage"+typeHeating), sizeHome));
-		displayResults(getTotalTransport(kmVoiture, typeVoiture, kmBus, kmPlane, kmTrain, kmMetro, data) + heatingConsommation(findInJson(data, "chauffage"+typeHeating), sizeHome) + electricityProduction(findInJson(data, "electricity"+typeElectricity),sizeHome,data));
+		displayResults(Math.round(getTotalTransport(kmVoiture, typeVoiture, kmBus, kmPlane, kmTrain, kmMetro, data) + 
+		heatingConsommation(findInJson(data, "chauffage"+typeHeating), sizeHome) + 
+		electricityProduction(findInJson(data, "electricity"+typeElectricity),sizeHome,data) +
+		eatMeat(freqmeat,local,data)));
 	return;
 	});
 }

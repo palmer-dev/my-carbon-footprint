@@ -14,8 +14,6 @@ function calculCO2ByDistance(distance) {
 
 	const waitingTime = clearGrid();
 
-	console.log(waitingTime);
-
 	document.querySelector("#saveButton").disabled = true;
 
 	setTimeout(() => {
@@ -136,115 +134,122 @@ function generationCard(name, emoji, emissions, id) {
 // ************ FONCTIONS GOOGLE ************ //
 // Permet l'autocompletion des adresses
 function initMap() {
-	let originInformations = {},
-		destinationInfrmations = {};
+	fetch("/api/apikey.json")
+		.then(response => {
+			return response.json();
+		})
+		.then(jsondata => {
 
-	const CONFIGURATION = {
-		mapsApiKey: "AIzaSyDAPkb9swgCy7sy02SeLUuT8B7apC0Hh94",
-		capabilities: {
-			addressAutocompleteControl: true,
-			mapDisplayControl: false,
-			ctaControl: false,
-		},
-	};
-	const componentForm = ["location"];
+			let originInformations = {},
+				destinationInfrmations = {};
 
-	const getFormInputElement = (component) =>
-		document.getElementById(component + "-input");
-	const autocompleteFirstInput = getFormInputElement("origin");
-	const autocompleteSecondInput = getFormInputElement("destination");
+			const CONFIGURATION = {
+				mapsApiKey: jsondata.keyAPI,
+				capabilities: {
+					addressAutocompleteControl: true,
+					mapDisplayControl: false,
+					ctaControl: false,
+				},
+			};
+			const componentForm = ["location"];
 
-	const autocompleteFirst = new google.maps.places.Autocomplete(
-		autocompleteFirstInput,
-		{
-			fields: [
-				"address_components",
-				"formatted_address",
-				"geometry",
-				"name",
-				"place_id",
-			],
-			types: ["geocode"],
-		}
-	);
+			const getFormInputElement = (component) =>
+				document.getElementById(component + "-input");
+			const autocompleteFirstInput = getFormInputElement("origin");
+			const autocompleteSecondInput = getFormInputElement("destination");
 
-	const autocompleteSecond = new google.maps.places.Autocomplete(
-		autocompleteSecondInput,
-		{
-			fields: [
-				"address_components",
-				"formatted_address",
-				"geometry",
-				"name",
-				"place_id",
-			],
-			types: ["geocode"],
-		}
-	);
-
-	autocompleteFirst.addListener("place_changed", function () {
-		const place = autocompleteFirst.getPlace();
-		if (!place.geometry) {
-			// User entered the name of a Place that was not suggested and
-			// pressed the Enter key, or the Place Details request failed.
-			window.alert(
-				"No details available for input: '" + place.name + "'"
+			const autocompleteFirst = new google.maps.places.Autocomplete(
+				autocompleteFirstInput,
+				{
+					fields: [
+						"address_components",
+						"formatted_address",
+						"geometry",
+						"name",
+						"place_id",
+					],
+					types: ["geocode"],
+				}
 			);
-			return;
-		}
 
-		originInformations.geometry = new google.maps.LatLng(
-			place.geometry.location.lat(),
-			place.geometry.location.lng()
-		);
-		originInformations.id = place.place_id;
-		originInformations.adress = place.formatted_address;
-
-		fillInAddress(place, autocompleteFirstInput);
-	});
-
-	autocompleteSecond.addListener("place_changed", function () {
-		const place = autocompleteSecond.getPlace();
-		if (!place.geometry) {
-			// User entered the name of a Place that was not suggested and
-			// pressed the Enter key, or the Place Details request failed.
-			window.alert(
-				"No details available for input: '" + place.name + "'"
+			const autocompleteSecond = new google.maps.places.Autocomplete(
+				autocompleteSecondInput,
+				{
+					fields: [
+						"address_components",
+						"formatted_address",
+						"geometry",
+						"name",
+						"place_id",
+					],
+					types: ["geocode"],
+				}
 			);
-			return;
-		}
 
-		destinationInfrmations.geometry = new google.maps.LatLng(
-			place.geometry.location.lat(),
-			place.geometry.location.lng()
-		);
-		destinationInfrmations.id = place.place_id;
-		destinationInfrmations.adress = place.formatted_address;
+			autocompleteFirst.addListener("place_changed", function () {
+				const place = autocompleteFirst.getPlace();
+				if (!place.geometry) {
+					// User entered the name of a Place that was not suggested and
+					// pressed the Enter key, or the Place Details request failed.
+					window.alert(
+						"No details available for input: '" + place.name + "'"
+					);
+					return;
+				}
 
-		fillInAddress(place, autocompleteSecondInput);
-	});
+				originInformations.geometry = new google.maps.LatLng(
+					place.geometry.location.lat(),
+					place.geometry.location.lng()
+				);
+				originInformations.id = place.place_id;
+				originInformations.adress = place.formatted_address;
 
-	function fillInAddress(place, inputElement) {
-		// optional parameter
-		const addressNameFormat = {
-			street_number: "long_name",
-			route: "long_name",
-			locality: "long_name",
-			administrative_area_level_1: "long_name",
-			country: "long_name",
-			postal_code: "long_name",
-		};
+				fillInAddress(place, autocompleteFirstInput);
+			});
 
-		inputElement.value = place.formatted_address;
+			autocompleteSecond.addListener("place_changed", function () {
+				const place = autocompleteSecond.getPlace();
+				if (!place.geometry) {
+					// User entered the name of a Place that was not suggested and
+					// pressed the Enter key, or the Place Details request failed.
+					window.alert(
+						"No details available for input: '" + place.name + "'"
+					);
+					return;
+				}
 
-		if (
-			autocompleteSecondInput.value != "" &&
-			autocompleteFirstInput.value != ""
-		) {
-			calculDistance(originInformations, destinationInfrmations);
-		} else {
-		}
-	}
+				destinationInfrmations.geometry = new google.maps.LatLng(
+					place.geometry.location.lat(),
+					place.geometry.location.lng()
+				);
+				destinationInfrmations.id = place.place_id;
+				destinationInfrmations.adress = place.formatted_address;
+
+				fillInAddress(place, autocompleteSecondInput);
+			});
+
+			function fillInAddress(place, inputElement) {
+				// optional parameter
+				const addressNameFormat = {
+					street_number: "long_name",
+					route: "long_name",
+					locality: "long_name",
+					administrative_area_level_1: "long_name",
+					country: "long_name",
+					postal_code: "long_name",
+				};
+
+				inputElement.value = place.formatted_address;
+
+				if (
+					autocompleteSecondInput.value != "" &&
+					autocompleteFirstInput.value != ""
+				) {
+					calculDistance(originInformations, destinationInfrmations);
+				} else {
+				}
+			}
+		});
 }
 
 function distanceBetweenTwoPointsDirect(origin, destination) {

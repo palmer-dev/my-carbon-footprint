@@ -115,12 +115,12 @@
   "unite": "kgCO2e\/kWh"
  },
  {
-  "type": "manger viande",
+  "type": "eatmeat",
   "conso": 40,
   "unite": "kgCO2e\/kg"
  },
  {
-  "type": "manger viande local",
+  "type": "eatmeatlocal",
   "conso": 17,
   "unite": "kgCO2e\/kg"
  },

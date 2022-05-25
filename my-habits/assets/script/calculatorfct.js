@@ -56,15 +56,23 @@ function heatingConsommation(type, size) {
 function electricityProduction(type, size, data) {
     let electricityConsommation = 0;
     if(size <= 60){
-        consom = findInJson(data, "consologement60")
+        consom = findInJson(data, "consologement60") // logement petit
     }else{
-        consom = findInJson(data, "consologement61")
+        consom = findInJson(data, "consologement61") //logement grand
     }
-    electricityConsommation = consom.conso * type.conso
+    electricityConsommation = consom.conso * type.conso;
 
     return electricityConsommation;
 }
 
-function eatMeat(freq, local) {
-    
+function eatMeat(freq, local, data) {
+    let meatConsommation = 0;
+    portion = freq / 3
+    if(local == "yes"){
+        consom = findInJson(data, "eatmeatlocal")
+    }else{
+        consom = findInJson(data, "eatmeat")
+    }
+    meatConsommation = (consom.conso * portion) * 52
+    return meatConsommation;
 }

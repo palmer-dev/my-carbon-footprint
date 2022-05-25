@@ -48,19 +48,14 @@
         <div class="card">
             <h3 class="titreCarte">Advices</h3>
             <div class="contentCard" id="advices">
-                <!-- <h4 id="advicesNoData">We can not give you any advices if you do not answer the habits quiz 😕</h4> -->
-<!--                <h4 id="advicesNoData">We can not give you any advices for the moment because the algorithm is still in coding 😕</h4>-->
-                <div class="adviceCard">
-                    <h3>TITLE CARD</h3>
-                    <p>You may better do something !</p>
-                </div>
+                 <h4 id="advicesNoData">We can not give you any advices if you do not answer the habits quiz 😕</h4>
             </div>
         </div>
         <div class="card">
-            <h3 class="titreCarte">My Informations</h3>
+            <h3 class="titreCarte">My Information</h3>
             <div class="contentCard" id="informations">
                 <?php if (!$_SESSION["connected"]) : ?>
-                <h4 id="informationsNoData"> We do not have any information about you 😕</h4>
+                <h4 id="informationNoData"> We do not have any information about you 😕</h4>
                 <?php else :?>
                 <p class="userName">Name: <span class="boldInfos"><?= $userFirstName ?></span></p>
                 <p class="userLastName">Last name: <span class="boldInfos"><?= $userLastName ?></span></p>
