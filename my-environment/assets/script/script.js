@@ -88,7 +88,21 @@ function displayHabitsFromUser(habitsUser) {
 
 	cleaningCardById("habits");
 
+	const data = loadDataJSON("/my-habits/assets/json/data.json");
+
 	habitsUser.forEach((poolOfAnswers) => {
+		const kmVoiture = parseInt(poolOfAnswers.userAnswers["Car trip"].replace("Not answered","")) || 0;
+		const typeVoiture = poolOfAnswers.userAnswers["Energy consumed"] === "Not answered" ? "Electricity": poolOfAnswers.userAnswers["Energy consumed"];
+		const kmBus = parseInt(poolOfAnswers.userAnswers["Bus trip"].replace("Not answered","")) || 0;
+		const kmPlane = parseInt(poolOfAnswers.userAnswers["Plane trip"].replace("Not answered","")) || 0;
+		const kmTrain = parseInt(poolOfAnswers.userAnswers["Train trip"].replace("Not answered","")) || 0;
+		const kmMetro = parseInt(poolOfAnswers.userAnswers["Metro trip"].replace("Not answered","")) || 0;
+		const typeHeating = poolOfAnswers.userAnswers["Heating system"] === "Not answered" ? "Electricity": poolOfAnswers.userAnswers["Heating system"];
+		const sizeHome = parseInt(poolOfAnswers.userAnswers["Home size"].replace("Not answered","")) || 0;
+		const typeElectricity = poolOfAnswers.userAnswers["Energie at home"] === "Not answered" ? "Nuclear": poolOfAnswers.userAnswers["Energie at home"];
+		const freqmeat = parseInt(poolOfAnswers.userAnswers["Meat consumption"].replace("Not answered","")) || 0;
+		const local = poolOfAnswers.userAnswers["local product consumption"] === "Not answered" ? "No" : poolOfAnswers.userAnswers["local product consumption"];
+
 		createCardHabits(
 			poolOfAnswers.id,
 			new Date(poolOfAnswers.dateCreation).toLocaleString(
@@ -104,17 +118,36 @@ function displayHabitsFromUser(habitsUser) {
 			poolOfAnswers.userAnswers["Energy consumed"],
 			poolOfAnswers.userAnswers["Most used transport means"],
 			habitsUser.indexOf(poolOfAnswers),
-			poolOfAnswers.userAnswers
+			poolOfAnswers.userAnswers,
+			totalConsommation(kmVoiture,typeVoiture,kmBus,kmPlane,kmTrain,kmMetro,typeHeating,sizeHome,typeElectricity,freqmeat,local,JSON.parse(data)).toFixed(2)
 		);
 	});
+	const poolOfAnswers = habitsUser[0];
+	const kmVoiture = parseInt(poolOfAnswers.userAnswers["Car trip"].replace("Not answered","")) || 0;
+	const typeVoiture = poolOfAnswers.userAnswers["Energy consumed"] === "Not answered" ? "Electricity": poolOfAnswers.userAnswers["Energy consumed"];
+	const kmBus = parseInt(poolOfAnswers.userAnswers["Bus trip"].replace("Not answered","")) || 0;
+	const kmPlane = parseInt(poolOfAnswers.userAnswers["Plane trip"].replace("Not answered","")) || 0;
+	const kmTrain = parseInt(poolOfAnswers.userAnswers["Train trip"].replace("Not answered","")) || 0;
+	const kmMetro = parseInt(poolOfAnswers.userAnswers["Metro trip"].replace("Not answered","")) || 0;
+	const typeHeating = poolOfAnswers.userAnswers["Heating system"] === "Not answered" ? "Electricity": poolOfAnswers.userAnswers["Heating system"];
+	const sizeHome = parseInt(poolOfAnswers.userAnswers["Home size"].replace("Not answered","")) || 0;
+	const typeElectricity = poolOfAnswers.userAnswers["Energie at home"] === "Not answered" ? "Nuclear": poolOfAnswers.userAnswers["Energie at home"];
+	const freqmeat = parseInt(poolOfAnswers.userAnswers["Meat consumption"].replace("Not answered","")) || 0;
+	const local = poolOfAnswers.userAnswers["local product consumption"] === "Not answered" ? "No" : poolOfAnswers.userAnswers["local product consumption"];
+
+	const totalConso = totalConsommation(kmVoiture,typeVoiture,kmBus,kmPlane,kmTrain,kmMetro,typeHeating,sizeHome,typeElectricity,freqmeat,local,JSON.parse(data)).toFixed(2);
+
+	const containerAdvices = document.getElementById("advices");
+	const total = document.createElement("p");
+	total.classList.add("totalCO2");
+	total.textContent = `${totalConso}kg CO2/year`;
+	containerAdvices.appendChild(total);
 }
 
 function displayAdvicesFromUser(advices) {
 	// GENERATION ADVICE CARD TO DEFINE
-	console.log(advices);
 	for (const advicesKey in advices) {
 		const advice = advices[advicesKey];
-		console.log(advice);
 		createCardAdvice(advice.title, advice.advice,advice.profit, advicesKey);
 	}
 }
@@ -253,7 +286,8 @@ function createCardHabits(
 	carEnergy,
 	travelUse,
 	nOCard,
-	transportsMean
+	transportsMean,
+	co2Value
 ) {
 	const containerHabits = document.getElementById("habits");
 	const habitsCard = document.createElement("div");
@@ -330,7 +364,7 @@ function createCardHabits(
 		<p>${travelMeans}</p>`
 			: "";
 
-	newHabitsCards += `<p class="footPrintSum"> X kg CO2/an </p> <p class="accuracyCalc">Accuracy: ${isAccurate(
+	newHabitsCards += `<p class="footPrintSum"> ${co2Value} kg CO2/year </p> <p class="accuracyCalc">Accuracy: ${isAccurate(
 		transportsMean
 	)}</p>`;
 
@@ -366,7 +400,7 @@ function createCardAdvice(title, textAdvice, profit, noCard) {
 
 	newHabitsCards += `<h3>${title}</h3>`;
 	newHabitsCards += `<p>${textAdvice}</p>`;
-	newHabitsCards += `<p class="profitValue">${profit}kg CO2/an</p>`;
+	newHabitsCards += `<p class="profitValue">${profit}kg CO2/year</p>`;
 
 	adviceCard.innerHTML = newHabitsCards;
 
@@ -449,6 +483,21 @@ function prepareButtonHover() {
 			removeUserProfile();
 		}
 	});
+}
+
+function loadDataJSON(filePath, mimeType)
+{
+	var xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("GET",filePath,false);
+	xmlhttp.overrideMimeType("application/json");
+	xmlhttp.send();
+	if (xmlhttp.status==200 && xmlhttp.readyState == 4 )
+	{
+		return xmlhttp.responseText;
+	}
+	else {
+		return null;
+	}
 }
 
 // INITIALISATION

@@ -32,20 +32,20 @@ function treatmentAdvices(dataUser) {
     // PREPARATION FOR RETURN
     let listAdvices = [];
     if (transportMeanMostlyUsedQuestion != adviceTransport) {
-        listAdvices.push({ title: "Transport mean", advice: `You may better use the ${adviceTransport} than the ${transportMeanMostlyUsedQuestion} for your trips.`, profit: getProfit("transportMean", transportMeanMostlyUsedQuestion, adviceTransport) })
+        listAdvices.push({ title: "Transport mean", advice: `You may better use the ${adviceTransport} than the ${transportMeanMostlyUsedQuestion} for your trips.`, profit: getProfit("transportMean", transportMeanMostlyUsedQuestion, adviceTransport, dataUser) })
     }
 
     if (energyUsedAtHome != adviceEnergyAtHome) {
-        listAdvices.push({ title: "Energy at home", advice: `You may better use ${adviceEnergyAtHome} energy than the ${energyUsedAtHome} energy for your home.`, profit: getProfit("energyAtHome", energyUsedAtHome, adviceEnergyAtHome) })
+        listAdvices.push({ title: "Energy at home", advice: `You may better use ${adviceEnergyAtHome} energy than the ${energyUsedAtHome} energy for your home.`, profit: getProfit("energyAtHome", energyUsedAtHome, adviceEnergyAtHome, dataUser) })
     }
     if (heatingSystem != adviceHeatingSystem) {
-        listAdvices.push({ title: "Heating system", advice: `You may better use ${adviceHeatingSystem} than the ${heatingSystem} for your heating system.`, profit: getProfit("heatingSystem", heatingSystem, adviceHeatingSystem) })
+        listAdvices.push({ title: "Heating system", advice: `You may better use ${adviceHeatingSystem} than the ${heatingSystem} for your heating system.`, profit: getProfit("heatingSystem", heatingSystem, adviceHeatingSystem, dataUser) })
     }
     if (carFuel != adviceCarFuel) {
-        listAdvices.push({ title: "Car fuel", advice: `You may better use a car that uses ${adviceCarFuel} than a car that uses ${carFuel}.`, profit: getProfit("carFuel", carFuel, adviceCarFuel) })
+        listAdvices.push({ title: "Car fuel", advice: `You may better use a car that uses ${adviceCarFuel} than a car that uses ${carFuel}.`, profit: getProfit("carFuel", carFuel, adviceCarFuel, dataUser) })
     }
     if (seasonalProduct == "No") {
-        listAdvices.push({ title: "Eating seasonal products", advice: adviceSeasonalProduct, profit: getProfit("seasonalProducts", seasonalProduct, adviceSeasonalProduct) })
+        listAdvices.push({ title: "Eating seasonal products", advice: adviceSeasonalProduct, profit: getProfit("seasonalProducts", seasonalProduct, adviceSeasonalProduct, dataUser) })
     }
 
     // CALL A FUNCTION THAT WILL GENERATE CARDS
@@ -56,10 +56,10 @@ function rankingTransport(currentTransport) {
     let bestTransport = currentTransport;
     switch (bestTransport) {
         case 'Car':
-            bestTransport = "Metro";
+            bestTransport = "Bus";
             break;
         case 'Taxi':
-            bestTransport = "Metro";
+            bestTransport = "Bus";
             break;
         case 'Bus':
             bestTransport = "Metro";
@@ -85,10 +85,10 @@ function rankingHeatingSystem(currentHeatingSystem) {
             bestHeatingSystem = 'GPL';
             break;
         case 'GPL':
-            bestHeatingSystem = "Electricity";
-            break;
-        case 'Electricity':
             bestHeatingSystem = "Geothermal energy";
+            break;
+        case 'Geothermal energy':
+            bestHeatingSystem = "Electricity";
             break;
         default:
             bestHeatingSystem = currentHeatingSystem;
@@ -160,19 +160,109 @@ function rankingSeasonalProduct(currentSeasonalConsumption) {
     }
 }
 
-function getProfit(type, oldMethod, newMethod) {
+function getProfit(type, oldMethod, newMethod, allUserData) {
     // To define Calcul profite between old and new methode of an
+    let kmVoiture = parseInt(allUserData.habits["Car trip"]) || 0;
+    let typeVoiture = allUserData.habits["Energy consumed"] === "" ? "Electricity": allUserData.habits["Energy consumed"];
+    let kmBus = parseInt(allUserData.habits["Bus trip"]) || 0;
+    let kmPlane = parseInt(allUserData.habits["Plane trip"]) || 0;
+    let kmTrain = parseInt(allUserData.habits["Train trip"]) || 0;
+    let kmMetro = parseInt(allUserData.habits["Metro trip"]) || 0;
+    let typeHeating = allUserData.habits["Heating system"] === "" ? "Electricity": allUserData.habits["Heating system"];
+    let sizeHome = parseInt(allUserData.habits["Home size"]) || 0;
+    let typeElectricity = allUserData.habits["Energie at home"] === "" ? "Nuclear": allUserData.habits["Energie at home"];
+    let freqmeat = parseInt(allUserData.habits["Meat consumption"]) || 0;
+    let local = allUserData.habits["local product consumption"] === "" ? "No" : allUserData.habits["local product consumption"];
+
+    // VARIABLES LOCALLY DEFINED
+    let difference = 0;
+    let data = loadDataJSON("/my-habits/assets/json/data.json");
+
+    if (type == "heatingSystem") {
+        console.log(heatingConsommation(findInJson(JSON.parse(data), "chauffage"+oldMethod), sizeHome));
+        console.log(heatingConsommation(findInJson(JSON.parse(data), "chauffage"+newMethod), sizeHome));
+        console.log();
+        console.log();
+    }
+
+    let oldValue = 0;
+    let newValue = 0;
+
     switch (type) {
         case 'transportMean':
-            getTotalTransport()
-            break;
-        case 'energyAtome':
-            break;
+            // TO DEFINE EXACTLY
+            oldValue = totalConsommation(kmVoiture,typeVoiture,kmBus,kmPlane,kmTrain,kmMetro,typeHeating,sizeHome,typeElectricity,freqmeat,local,JSON.parse(data));
+            let arrayKm = [kmVoiture,kmBus,kmPlane,kmTrain,kmMetro];
+            let toAdd = 0;
+            switch (oldMethod) {
+                case 'Car':
+                    toAdd = arrayKm[0];
+                    arrayKm[0] = 0;
+                    break;
+                case 'Taxi':
+                    toAdd = arrayKm[0];
+                    arrayKm[0] = 0;
+                    break;
+                case 'Bus':
+                    toAdd = arrayKm[1];
+                    arrayKm[1] = 0;
+                    break;
+                case 'Metro':
+                    toAdd = arrayKm[4];
+                    arrayKm[4] = 0;
+                    break;
+            }
+            switch (newMethod) {
+                case 'Car':
+                    arrayKm[0] += toAdd;
+                    break;
+                case 'Taxi':
+                    arrayKm[0] += toAdd;
+                    break;
+                case 'Bus':
+                    arrayKm[1] += toAdd;
+                    break;
+                case 'Metro':
+                    arrayKm[4] += toAdd;
+                    break;
+            }
+            newValue = totalConsommation(arrayKm[0],typeVoiture,arrayKm[1],arrayKm[2],arrayKm[3],arrayKm[4],typeHeating,sizeHome,typeElectricity,freqmeat,local,JSON.parse(data));
+            difference = newValue - oldValue;
+            return difference.toFixed(2);
+        case 'energyAtHome':
+            oldValue = totalConsommation(kmVoiture,typeVoiture,kmBus,kmPlane,kmTrain,kmMetro,typeHeating,sizeHome,oldMethod,freqmeat,local,JSON.parse(data));
+            newValue = totalConsommation(kmVoiture,typeVoiture,kmBus,kmPlane,kmTrain,kmMetro,typeHeating,sizeHome,newMethod,freqmeat,local,JSON.parse(data));
+            difference = difference = newValue - oldValue;
+            return difference.toFixed(2);
         case 'heatingSystem':
-            break;
+            oldValue = totalConsommation(kmVoiture, typeVoiture, kmBus, kmPlane, kmTrain, kmMetro, oldMethod, sizeHome, typeElectricity, freqmeat, local, JSON.parse(data));
+            newValue = totalConsommation(kmVoiture, typeVoiture, kmBus, kmPlane, kmTrain, kmMetro, newMethod, sizeHome, typeElectricity, freqmeat, local, JSON.parse(data));
+            difference = difference = newValue - oldValue;
+            return difference.toFixed(2);
         case 'carFuel':
-            break;
+            oldValue = totalConsommation(kmVoiture, oldMethod, kmBus, kmPlane, kmTrain, kmMetro, typeHeating, sizeHome, typeElectricity, freqmeat, local, JSON.parse(data));
+            newValue = totalConsommation(kmVoiture, newMethod, kmBus, kmPlane, kmTrain, kmMetro, typeHeating, sizeHome, typeElectricity, freqmeat, local, JSON.parse(data));
+            difference = difference = newValue - oldValue;
+            return difference.toFixed(2);
         case 'seasonalProducts':
-            break;
+            oldValue = totalConsommation(kmVoiture,typeVoiture,kmBus,kmPlane,kmTrain,kmMetro,typeHeating,sizeHome,typeElectricity,freqmeat,oldMethod,JSON.parse(data));
+            newValue = totalConsommation(kmVoiture,typeVoiture,kmBus,kmPlane,kmTrain,kmMetro,typeHeating,sizeHome,typeElectricity,freqmeat,newMethod,JSON.parse(data));
+            difference = difference = newValue - oldValue;
+            return difference.toFixed(2);
+    }
+}
+
+function loadDataJSON(filePath, mimeType)
+{
+    var xmlhttp=new XMLHttpRequest();
+    xmlhttp.open("GET",filePath,false);
+    xmlhttp.overrideMimeType("application/json");
+    xmlhttp.send();
+    if (xmlhttp.status==200 && xmlhttp.readyState == 4 )
+    {
+        return xmlhttp.responseText;
+    }
+    else {
+        return null;
     }
 }
