@@ -161,5 +161,17 @@ function rankingSeasonalProduct(currentSeasonalConsumption) {
 }
 
 function getProfit(type, oldMethod, newMethod) {
-    // To define Calcul profite between old and new methode of an 
+    // To define Calcul profite between old and new methode of an
+    switch (type) {
+        case 'transportMean':
+            break;
+        case 'energyAtome':
+            break;
+        case 'heatingSystem':
+            break;
+        case 'carFuel':
+            break;
+        case 'seasonalProducts':
+            break;
+    }
 }

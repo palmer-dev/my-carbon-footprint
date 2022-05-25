@@ -154,7 +154,6 @@ h2 {
 }
 
 .habitsCard {
-	// background-color: red;
 	margin: 20px 0px;
 	padding: 10px 0px;
 	display: flex;
@@ -228,6 +227,26 @@ h2 {
 
 	@include for-mobile {
 		margin: 10px 0px;
+	}
+}
+
+.adviceCard{
+	margin: 20px 0px;
+	padding: 10px 0px;
+	display: flex;
+	flex-flow: column wrap;
+	align-items: flex-start;
+	position: relative;
+	left: 120px;
+	opacity: 0;
+	animation: showingCards 0.4s ease-out forwards;
+
+	h3{
+		@include font-style(24, $FC-contrast, bold);
+	}
+
+	p{
+		@include font-style(16, $FC-contrast);
 	}
 }
 

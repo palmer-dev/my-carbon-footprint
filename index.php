@@ -29,7 +29,7 @@
         <div class="part work normal">
             <p>
                 We all live in a world where the climate begins to be in the center of our lives. We all care more and
-                more about our impact on the environment and we can reduce it by some small tips and changing some
+                more about our impact on the environment, and we can reduce it by some small tips and changing some
                 habits that we have. Going from that, 2 students bring the idea to code a website giving you the ability
                 to see your impact on the environment with the major greenhouse gas, the carbon dioxide (CO2). The data
                 that we use to help you come from international databases from Our World in Data. And some french
@@ -40,7 +40,7 @@
 
         <div class="part reverse work">
             <p>
-                The website gives you the ability to follow your CO2 emission with a few informations about your habits.
+                The website gives you the ability to follow your CO2 emission with a few information about your habits.
                 That way we can give you advice to reduce your carbon footprint with some small tips easy to do in your
                 everyday life. We also give you the ability to calculate the carbon footprint of your trips, and show
                 you different transport means for which you can change.

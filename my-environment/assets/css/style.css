@@ -684,6 +684,46 @@ h2 {
   }
 }
 
+.adviceCard {
+  margin: 20px 0px;
+  padding: 10px 0px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
+  position: relative;
+  left: 120px;
+  opacity: 0;
+  animation: showingCards 0.4s ease-out forwards;
+}
+.adviceCard h3 {
+  color: #fff;
+  font-weight: bold;
+  font-size: 2.4rem;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media (max-width: 599px) {
+  .adviceCard h3 {
+    font-size: 1.2rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+.adviceCard p {
+  color: #fff;
+  font-weight: normal;
+  font-size: 1.6rem;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media (max-width: 599px) {
+  .adviceCard p {
+    font-size: 0.8rem;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+
 .removedCard {
   animation: removingCards 0.5s ease-in-out forwards;
 }

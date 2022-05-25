@@ -123,5 +123,15 @@
   "type": "manger viande local",
   "conso": 17,
   "unite": "kgCO2e\/kg"
+ },
+ {
+     "type":"consologement60",
+     "conso": 1550,
+     "unite":"kwh\/an"
+ },
+ {
+     "type":"consologement61",
+     "conso":1950,
+     "unite":"kwh\/an"
  }
 ]

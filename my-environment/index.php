@@ -49,8 +49,11 @@
             <h3 class="titreCarte">Advices</h3>
             <div class="contentCard" id="advices">
                 <!-- <h4 id="advicesNoData">We can not give you any advices if you do not answer the habits quiz 😕</h4> -->
-                <h4 id="advicesNoData">We can not give you any advices for the moment because the algorithm is still in
-                    coding 😕</h4>
+<!--                <h4 id="advicesNoData">We can not give you any advices for the moment because the algorithm is still in coding 😕</h4>-->
+                <div class="adviceCard">
+                    <h3>TITLE CARD</h3>
+                    <p>You may better do something !</p>
+                </div>
             </div>
         </div>
         <div class="card">

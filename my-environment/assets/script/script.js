@@ -109,8 +109,12 @@ function displayHabitsFromUser(habitsUser) {
 	});
 }
 
-function displayAdvicesFromUser(Advices) {
+function displayAdvicesFromUser(advices) {
 	// GENERATION ADVICE CARD TO DEFINE
+	console.log(advices);
+	for (const advicesKey in advices) {
+		createCardAdvice(advicesKey.title, advicesKey.advice,advicesKey.profit, advices.indexOf(advicesKey));
+	}
 }
 
 // Delete functions
@@ -347,6 +351,21 @@ function createCardHabits(
 
 	containerHabits.appendChild(habitsCard);
 	containerHabits.getElementsByTagName("h4")[0].style.display = "none";
+}
+
+function createCardAdvice(title, textAdvice, profit, noCard) {
+	const containerAdvices = document.getElementById("advices");
+	const adviceCard = document.createElement("div");
+	adviceCard.classList.add("adviceCard");
+	adviceCard.style.animationDelay = (0.3 * noCard).toString() + "s";
+
+	let newHabitsCards = "";
+
+	newHabitsCards += `<h3>${title}</h3>`;
+
+	newHabitsCards += `<h3>${title}</h3>`;
+
+	containerAdvices.appendChild(adviceCard);
 }
 
 // REMOVING CARD FUNCTION

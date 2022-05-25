@@ -205,9 +205,12 @@ function calculateCO2WithTheAnswers() {
 	var kmMetro = questions[7].userAnswer || 0;
 	var kmBus = questions[8].userAnswer || 0;
 	var typeHeating = questions[9].userAnswer || "Electricity";
+	var typeElectricity = questions[10].userAnswer || "Nuclear";
 	var sizeHome = questions[13].userAnswer || 50;
 	$.get("./assets/json/data.json", function (data) {
-		displayResults(getTotalTransport(kmVoiture, typeVoiture, kmBus, kmPlane, kmTrain, kmMetro, data) + heatingConsommation(findInJson(data, "chauffage"+typeHeating), sizeHome));
+		console.log("prod electricity" + electricityProduction(typeElectricity,sizeHome,data));	
+		console.log("chauffage " + heatingConsommation(findInJson(data, "chauffage"+typeHeating), sizeHome));
+		displayResults(getTotalTransport(kmVoiture, typeVoiture, kmBus, kmPlane, kmTrain, kmMetro, data) + heatingConsommation(findInJson(data, "chauffage"+typeHeating), sizeHome) + electricityProduction(findInJson(data, "electricity"+typeElectricity),sizeHome,data));
 	return;
 	});
 }
