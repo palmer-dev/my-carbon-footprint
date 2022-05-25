@@ -74,6 +74,7 @@
     </div>
     <input type="hidden" name="idUser" id="idUser" value="<?= $userId ?>">
 </body>
+<script src="/my-habits/assets/script/calculatorfct.js"></script>
 <script type="module" src="./assets/script/script.js"></script>
 
 </html>

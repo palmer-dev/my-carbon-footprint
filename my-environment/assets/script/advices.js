@@ -164,6 +164,7 @@ function getProfit(type, oldMethod, newMethod) {
     // To define Calcul profite between old and new methode of an
     switch (type) {
         case 'transportMean':
+            getTotalTransport()
             break;
         case 'energyAtome':
             break;

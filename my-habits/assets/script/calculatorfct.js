@@ -42,7 +42,7 @@ function getTotalTransport(kmCar, typeVoiture, kmBus, kmPlane, kmTrain, kmMetro,
     emission = carConsommation(kmCar, findInJson(data, typeVoiture + "Car")) +
         planeConsommation(kmPlane, findInJson(data, "plane")) +
         trainConsommation(kmTrain, findInJson(data, "train")) +
-        busConsommation(kmBus, findInJson(data, "bus"))
+        busConsommation(kmBus, findInJson(data, "bus")) +
         metroConsommation(kmMetro, findInJson(data, "metro"));
     // console.log(emission);
     return emission;
@@ -75,4 +75,13 @@ function eatMeat(freq, local, data) {
     }
     meatConsommation = (consom.conso * portion) * 52
     return meatConsommation;
+}
+
+function totalConsommation(kmVoiture, typeVoiture, kmBus, kmPlane, kmTrain, kmMetro, typeHeating, sizeHome, typeElectricity,freqmeat,local, data) {
+    var total = getTotalTransport(kmVoiture, typeVoiture, kmBus, kmPlane, kmTrain, kmMetro, data) + 
+		heatingConsommation(findInJson(data, "chauffage"+typeHeating), sizeHome) + 
+		electricityProduction(findInJson(data, "electricity"+typeElectricity),sizeHome,data) +
+		eatMeat(freqmeat,local,data)
+
+    return total
 }

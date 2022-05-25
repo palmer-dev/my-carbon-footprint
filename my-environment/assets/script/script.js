@@ -357,6 +357,7 @@ function createCardHabits(
 
 function createCardAdvice(title, textAdvice, profit, noCard) {
 	const containerAdvices = document.getElementById("advices");
+	const advicesNoData = document.getElementById("advicesNoData");
 	const adviceCard = document.createElement("div");
 	adviceCard.classList.add("adviceCard");
 	adviceCard.style.animationDelay = (0.3 * noCard).toString() + "s";
@@ -370,6 +371,7 @@ function createCardAdvice(title, textAdvice, profit, noCard) {
 	adviceCard.innerHTML = newHabitsCards;
 
 	containerAdvices.appendChild(adviceCard);
+	advicesNoData.style.display = "none";
 }
 
 // REMOVING CARD FUNCTION

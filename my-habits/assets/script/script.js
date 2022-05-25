@@ -209,10 +209,7 @@ function calculateCO2WithTheAnswers() {
 	var local = questions[12].userAnswer || "No"
 	var sizeHome = questions[13].userAnswer || 0;
 	$.get("./assets/json/data.json", function (data) {
-		displayResults(Math.round(getTotalTransport(kmVoiture, typeVoiture, kmBus, kmPlane, kmTrain, kmMetro, data) + 
-		heatingConsommation(findInJson(data, "chauffage"+typeHeating), sizeHome) + 
-		electricityProduction(findInJson(data, "electricity"+typeElectricity),sizeHome,data) +
-		eatMeat(freqmeat,local,data)));
+		displayResults(Math.round(totalConsommation(kmVoiture,typeVoiture, kmBus,kmPlane,kmTrain,kmMetro,typeHeating,sizeHome,typeElectricity,freqmeat,local,data)));
 	return;
 	});
 }
