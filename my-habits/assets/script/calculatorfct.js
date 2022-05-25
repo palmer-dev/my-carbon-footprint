@@ -77,9 +77,9 @@ function eatMeat(freq, local, data) {
     return meatConsommation;
 }
 
-function totalConsommation(kmVoiture, typeVoiture, kmBus, kmPlane, kmTrain, kmMetro, typeHeating, sizeHome, typeElectricity,freqmeat,local, data) {
-    var total = getTotalTransport(kmVoiture, typeVoiture, kmBus, kmPlane, kmTrain, kmMetro, data) + 
-		heatingConsommation(findInJson(data, "chauffage"+typeHeating), sizeHome) + 
+function totalConsommation(kmVoiture = 0, typeVoiture = "Gasoline", kmBus = 0, kmPlane = 0, kmTrain = 0, kmMetro = 0, typeHeating = "Electricity", sizeHome = 0, typeElectricity = "Nuclear",freqmeat = 0,local = "No", data) {
+    const total = getTotalTransport(kmVoiture, typeVoiture, kmBus, kmPlane, kmTrain, kmMetro, data) +
+		heatingConsommation(findInJson(data, "chauffage"+typeHeating), sizeHome) +
 		electricityProduction(findInJson(data, "electricity"+typeElectricity),sizeHome,data) +
 		eatMeat(freqmeat,local,data)
 
