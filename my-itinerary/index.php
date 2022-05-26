@@ -5,6 +5,10 @@
     $userLastName = $_SESSION['lastname'];
     $userEmail = $_SESSION['email'];
     $userId = $_SESSION['userid'];
+
+    $json_url = $_SERVER["DOCUMENT_ROOT"] . "/api/apikey.json";
+    $json = file_get_contents($json_url);
+    $GoogleAPIkey = json_decode($json, TRUE)["keyAPI"];
 ?>
 
 <!DOCTYPE html>
@@ -79,10 +83,9 @@
     </div>
     <input type="hidden" name="idUser" id="idUser" value="<?= $userId ?>">
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=<?=$GoogleAPIkey?>&libraries=geometry,places&callback=initMap" async defer></script>
 </body>
-<script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAPkb9swgCy7sy02SeLUuT8B7apC0Hh94&libraries=geometry,places&callback=initMap"
-    async defer></script>
+
 <?php if ($_SESSION["connected"] == true) : ?>
 <script>
 const canSave = true;

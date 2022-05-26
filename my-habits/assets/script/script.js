@@ -1,7 +1,6 @@
 import {
 	insertionDataBase,
-	selectDataBase,
-	saveTempAnswerForLogin,
+	selectDataBase
 } from "../../../assets/script/sqlCommunication.js";
 
 let questions = [];
@@ -271,7 +270,7 @@ function saveUserAnswerForLogin() {
 		linkerId: linkerId,
 	};
 
-	saveTempAnswerForLogin(dataForRequest, returnDataTreatment);
+	insertionDataBase(dataForRequest, returnDataTreatment);
 }
 
 document.querySelector(".habitsQuiz").addEventListener("click", startQuiz);

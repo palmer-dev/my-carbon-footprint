@@ -5,7 +5,7 @@ export function setDataCO2(data) {
 }
 
 // INCLUDE MODULES
-import { getEmiterData } from "./dataLookup.js";
+import { getEmitterData } from "./dataLookup.js";
 
 // FONCTIONS OBSERVER
 const observerDivSeparator = new ResizeObserver((entries) => {
@@ -39,7 +39,7 @@ const observerChartSize = new ResizeObserver((entries) => {
 	}
 });
 
-export function getObserver() {
+export function setObserverChart() {
 	document.querySelectorAll("#chart > tr > td > div").forEach((chartLine) => {
 		observerChartSize.observe(chartLine);
 	});
@@ -47,7 +47,7 @@ export function getObserver() {
 
 function init() {
 	observerDivSeparator.observe(document.getElementById("sectionInSeparator"));
-	getEmiterData();
+	getEmitterData();
 }
 
 // INITIALISATION

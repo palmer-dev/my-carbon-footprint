@@ -143,6 +143,7 @@ function initMap() {
 			let originInformations = {},
 				destinationInfrmations = {};
 
+			console.log(jsondata.keyAPI)
 			const CONFIGURATION = {
 				mapsApiKey: jsondata.keyAPI,
 				capabilities: {
