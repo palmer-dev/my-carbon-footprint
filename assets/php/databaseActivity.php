@@ -3,6 +3,12 @@
 
     header("Content-Type: application/json; charset=utf8mb4");
 
+    include_once './databaseLogin.php';
+    global $host;
+    global $database_name;
+    global $username;
+    global $password;
+
     class question {
         public string $id;
         public string $theme;
@@ -77,11 +83,19 @@
     }
 
     class Database {
-        private $host = "127.0.0.1";
-        private $database_name = "MCF";
-        private $username = "mcfdev";
-        private $password = "McfDevPswSec69";
+        private $host;
+        private $database_name;
+        private $username;
+        private $password;
         public $conn;
+
+        function __construct($host, $database_name, $username, $password) {
+            $this->host = $host;
+            $this->database_name = $database_name;
+            $this->username = $username;
+            $this->password = $password;
+        }
+
         public function getConnection(){
             $this->conn = null;
             try{
@@ -174,7 +188,7 @@
         }
     }
 
-    $dbAccess = new Database();
+    $dbAccess = new Database($host, $database_name, $username, $password);
 
     $data = json_decode(file_get_contents("php://input"));
 
