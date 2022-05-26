@@ -10,7 +10,6 @@
     $userEmail = $_SESSION['email'];
     $userId = $_SESSION['userid'];
 
-    // print_r($_COOKIE["userAnswers"]);
 ?>
 
 <!DOCTYPE html>

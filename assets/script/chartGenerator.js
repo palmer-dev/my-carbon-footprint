@@ -1,35 +1,26 @@
-export function chartGenerator(tableau, callBack) {
-	// PALETTE OF COLORS
-	var colors = [
-		"#FF4800",
-		"#FF5400",
-		"#FF6000",
-		"#FF6D00",
-		"#FF7900",
-		"#FF8500",
-		"#FF9100",
-		"#FF9E00",
-		"#FFAA00",
-		"#FFB600",
-	];
+// GLOBAL VARIABLE
+let elementSet = 1;
+const colors = ["#FF4800","#FF5400","#FF6000","#FF6D00","#FF7900","#FF8500","#FF9100","#FF9E00","#FFAA00","#FFB600"];
 
-	var comparisonPerc = tableau[0].co2;
+// FUNCTIONS
+export function chartGenerator(tableau, callBack) {
+	const maximalValue = tableau[0].co2;
 	for (let index = 0; index < 5; index++) {
 		// VARIABLE VALUE
-		var nameCountry = tableau[index].country;
-		var value = tableau[index].co2;
-		var percentage = (value / comparisonPerc) * 100;
+		const nameCountry = tableau[index].country;
+		const value = tableau[index].co2;
+		const percentage = (value / maximalValue) * 100;
 
 		// PARENT TABLE
-		var parent = document.getElementById("chart");
+		const parent = document.getElementById("chart");
 
 		// CREATION OF THE NEW LINE
-		var newLine = document.createElement("tr");
+		const newLine = document.createElement("tr");
 
 		// CREATION OF THE FIRST COLUMN
-		var newColumn1 = document.createElement("td");
-		var newChartValue = document.createElement("div");
-		var newChartValueDisplay = document.createElement("h3");
+		const newColumn1 = document.createElement("td");
+		const newChartValue = document.createElement("div");
+		const newChartValueDisplay = document.createElement("h3");
 		newChartValueDisplay.innerHTML =
 			parseFloat(value) >= 1000
 				? (parseFloat(value) / 1000).toLocaleString() + "k"
@@ -38,8 +29,8 @@ export function chartGenerator(tableau, callBack) {
 		newColumn1.appendChild(newChartValue);
 
 		// CREATION OF THE SECOND COLUMN
-		var newColumn2 = document.createElement("td");
-		var newCountry = document.createElement("h3");
+		const newColumn2 = document.createElement("td");
+		const newCountry = document.createElement("h3");
 		newCountry.innerHTML = nameCountry;
 		newColumn2.appendChild(newCountry);
 
@@ -54,12 +45,10 @@ export function chartGenerator(tableau, callBack) {
 	callBack();
 }
 
-var elementSeted = 1;
-var referenceHeight = 0;
-
-function transitionChart(width, element, positionText) {
-	setTimeout(() => {
+function transitionChart(width, element) {
+	setTimeout((noLine) => {
+		element.style.background = colors[noLine];
 		element.style.width = width + "%";
-	}, elementSeted * 200);
-	elementSeted += 1;
+	}, elementSet * 200, elementSet);
+	elementSet += 1;
 }

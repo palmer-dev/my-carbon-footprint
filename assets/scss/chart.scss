@@ -22,7 +22,7 @@ p.uppercase {
 			width: 80%;
 			div {
 				width: 0%;
-				transition: width 2s ease 0s;
+				transition: width 2s ease 0s, background 2s ease 0s;
 				height: 40px;
 				background: rgb(255, 72, 0);
 				padding-right: 15px;

@@ -110,11 +110,11 @@
             $_SESSION["email"] = $user["us_email"];
             $_SESSION["userid"] = $user["us_id"];
 
-            $cookieValues = json_decode($_COOKIE["userAnswers"]);
+//            $cookieValues = json_decode($_COOKIE["userAnswers"]);
+            $cookieValues = json_decode($_SESSION["userAnswers"]);
 
             try {
                 if (isset($cookieValues->habits)){
-                    
                     // Enregistrement des données provisoires habits
                     $linkerId = $cookieValues->linkerId;
                     foreach ($cookieValues->habits as $key => $value) {
@@ -135,7 +135,8 @@
             }
             catch (\Throwable $th) {}
 
-            setcookie("userAnswers", "", time() - 3600);
+            unset($_SESSION["userAnswers"]);
+            $_SESSION["userAnswers"] = null;
         }
 
         public function sqlVerifUser($username, $password){
@@ -213,10 +214,8 @@
             }
             else {
                 try {
-                    setcookie("userAnswers", json_encode(["linkerId" => $data->linkerId, "habits" => $data->questions]), time() + 1800,'/');
-                    // $_COOKIE["userAnswers"]["linkerId"] = $data->linkerId;
-                    // $_COOKIE["userAnswers"]["habits"] = $data->questions;
-                    $statut = ["error" => false, "textReturned" => ["isConnected" => false, "message" => "DataSaved"]];
+                    $_SESSION["userAnswers"] = json_encode(["linkerId" => $data->linkerId, "habits" => $data->questions]);
+                    $statut = ["error" => false, "textReturned" => ["isConnected" => false, "message" => $_SESSION["userAnswers"]]];
                 }
                 catch (\Throwable $th) {
                     $statut = ["error" => true, "textReturned" =>  ["isConnected" => false, "message" => $th->getMessage()]];
@@ -235,8 +234,8 @@
             } 
             else {
                 try {
-                    setcookie("userAnswers", json_encode(["itinerary" => ["originPoint" => $data->originPoint, "destinationPoint" => $data->destinationPoint, "transportMean" => $data->transportMean, "distance" => $data->distance, "co2" => $data->co2, "nbRecurrence" => $data->nbRecurrence]]), time() + 1800,'/');
-                    $statut = ["error" => false, "textReturned" => ["isConnected" => false, "message" => "DataSaved"]];
+                    $_SESSION["userAnswers"] = json_encode(["itinerary" => ["originPoint" => $data->originPoint, "destinationPoint" => $data->destinationPoint, "transportMean" => $data->transportMean, "distance" => $data->distance, "co2" => $data->co2, "nbRecurrence" => $data->nbRecurrence]]);
+                    $statut = ["error" => false, "textReturned" => ["isConnected" => false, "message" => $_SESSION["userAnswers"]]];
                 }
                 catch (\Throwable $th) {
                     $statut = ["error" => true, "textReturned" => ["isConnected" => false, "message" => $th->getMessage()]];
